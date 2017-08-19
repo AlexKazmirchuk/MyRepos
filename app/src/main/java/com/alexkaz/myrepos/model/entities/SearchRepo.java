@@ -2,7 +2,7 @@ package com.alexkaz.myrepos.model.entities;
 
 import com.google.gson.annotations.SerializedName;
 
-public class RepoEntity {
+public class SearchRepo {
 
     @SerializedName("id")
     private int id;
@@ -28,7 +28,14 @@ public class RepoEntity {
     @SerializedName("language")
     private String language;
 
-    public RepoEntity() {
+    @SerializedName("watchers")
+    private int watchers;
+
+    @SerializedName("score")
+    private double score;
+
+
+    public SearchRepo() {
     }
 
     public int getId() {
@@ -93,6 +100,22 @@ public class RepoEntity {
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    public int getWatchers() {
+        return watchers;
+    }
+
+    public void setWatchers(int watchers) {
+        this.watchers = watchers;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
     }
 
 }
