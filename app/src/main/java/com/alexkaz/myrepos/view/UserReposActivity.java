@@ -1,10 +1,11 @@
-package com.alexkaz.myrepos;
+package com.alexkaz.myrepos.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.alexkaz.myrepos.R;
 import com.alexkaz.myrepos.model.entities.RepoEntity;
 import com.alexkaz.myrepos.ui.UserRepoRVAdapter;
 
