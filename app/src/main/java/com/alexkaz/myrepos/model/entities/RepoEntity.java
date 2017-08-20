@@ -25,6 +25,9 @@ public class RepoEntity {
     @SerializedName("watchers_count")
     private int watchersCount;
 
+    @SerializedName("forks_count")
+    private int forksCount;
+
     @SerializedName("language")
     private String language;
 
@@ -95,4 +98,11 @@ public class RepoEntity {
         this.language = language;
     }
 
+    public int getForksCount() {
+        return forksCount;
+    }
+
+    public void setForksCount(int forksCount) {
+        this.forksCount = forksCount;
+    }
 }
