@@ -8,11 +8,11 @@ public class UserReposPresenterImpl implements UserReposPresenter {
 
     private UserReposView view;
     private GithubService githubService;
-    private ConnInfoHelper connInfoHelper;
+    private ConnInfoHelper helper;
 
     public UserReposPresenterImpl(GithubService githubService, ConnInfoHelper connInfoHelper) {
         this.githubService = githubService;
-        this.connInfoHelper = connInfoHelper;
+        this.helper = connInfoHelper;
     }
 
     @Override
@@ -22,14 +22,19 @@ public class UserReposPresenterImpl implements UserReposPresenter {
 
     @Override
     public void loadRepos() {
-        view.showLoading();
-        githubService.getUserRepos().subscribe(repos -> {
-            view.hideLoading();
-            view.showRepos(repos);
-        }, throwable -> {
-            view.hideLoading();
-            view.showErrorMessage(throwable.getMessage());
-        });
+        if (helper.isOnline()){
+            view.showLoading();
+            githubService.getUserRepos().subscribe(repos -> {
+                view.hideLoading();
+                view.showRepos(repos);
+            }, throwable -> {
+                view.hideLoading();
+                view.showErrorMessage(throwable.getMessage());
+            });
+        } else {
+            view.hideRepos();
+            view.showNoConnectionMessage();
+        }
     }
 
     @Override
