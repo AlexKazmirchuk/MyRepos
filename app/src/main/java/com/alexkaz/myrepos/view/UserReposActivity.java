@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -13,6 +14,7 @@ import com.alexkaz.myrepos.R;
 import com.alexkaz.myrepos.model.entities.RepoEntity;
 import com.alexkaz.myrepos.presenter.UserReposPresenter;
 import com.alexkaz.myrepos.ui.UserRepoRVAdapter;
+import com.paginate.Paginate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +30,8 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
     private ProgressBar progressBar;
     private RecyclerView repoListRV;
     private UserRepoRVAdapter adapter;
+    private boolean loadingInProgress = false;
+    private boolean hasLoadedAllItems = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,28 +44,53 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
     private void initComponents(){
         progressBar = findViewById(R.id.userReposPB);
         noConnView = findViewById(R.id.noConnLayout);
-        initRecyclerView();
         initPresenter();
+        initRecyclerView();
     }
 
     private void initPresenter() {
         ((MyApp)getApplication()).getMyComponent().inject(this);
         presenter.bindView(this);
-        presenter.loadRepos();
     }
 
     private void initRecyclerView() {
         repoListRV = findViewById(R.id.repoListRV);
-        adapter = new UserRepoRVAdapter(new ArrayList<>());
+        adapter = new UserRepoRVAdapter();
         repoListRV.setLayoutManager(new LinearLayoutManager(this));
         repoListRV.setAdapter(adapter);
+
+        Paginate.Callbacks callbacks = new Paginate.Callbacks() {
+            @Override
+            public void onLoadMore() {
+                presenter.loadNextPage();
+                loadingInProgress = true;
+                Log.d("myTag", "onLoadMore");
+            }
+
+            @Override
+            public boolean isLoading() {
+                return loadingInProgress;
+            }
+
+            @Override
+            public boolean hasLoadedAllItems() {
+                return hasLoadedAllItems;
+            }
+        };
+
+        Paginate.with(repoListRV, callbacks)
+                .setLoadingTriggerThreshold(1)
+                .addLoadingListItem(false)
+                .build();
     }
 
     @Override
     public void showRepos(List<RepoEntity> userRepos) {
+        if (userRepos.size() == 0 || userRepos.size() < 8){hasLoadedAllItems = true;}
         repoListRV.setVisibility(View.VISIBLE);
         adapter.add(userRepos);
         adapter.notifyDataSetChanged();
+        loadingInProgress = false;
     }
 
     @Override

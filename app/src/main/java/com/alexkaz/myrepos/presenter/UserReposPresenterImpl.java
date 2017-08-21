@@ -10,6 +10,9 @@ public class UserReposPresenterImpl implements UserReposPresenter {
     private GithubService githubService;
     private ConnInfoHelper helper;
 
+    private int page = 1;
+    private int perPage = 8;
+
     public UserReposPresenterImpl(GithubService githubService, ConnInfoHelper connInfoHelper) {
         this.githubService = githubService;
         this.helper = connInfoHelper;
@@ -38,7 +41,19 @@ public class UserReposPresenterImpl implements UserReposPresenter {
     }
 
     @Override
-    public void loadNextPage(int page, int perPage) {
-        // todo impl later
+    public void loadNextPage() {
+        if (helper.isOnline()){
+            view.showLoading();
+            githubService.getUserRepos(page, perPage).subscribe(repos -> {
+                view.hideLoading();
+                view.showRepos(repos);
+                page++;
+            }, throwable -> {
+                view.hideLoading();
+                view.showErrorMessage(throwable.getMessage());
+            });
+        } else {
+            view.showErrorMessage("No internet connection!");
+        }
     }
 }

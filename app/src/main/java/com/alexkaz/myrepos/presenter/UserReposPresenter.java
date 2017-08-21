@@ -8,6 +8,6 @@ public interface UserReposPresenter {
 
     void loadRepos();
 
-    void loadNextPage(int page, int perPage);
+    void loadNextPage();
 
 }

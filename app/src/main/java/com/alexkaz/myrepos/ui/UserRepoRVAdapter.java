@@ -16,8 +16,7 @@ public class UserRepoRVAdapter extends RecyclerView.Adapter<UserRepoRVAdapter.Us
 
     private List<RepoEntity> userRepos = new ArrayList<>();
 
-    public UserRepoRVAdapter(List<RepoEntity> userRepos) {
-        this.userRepos = userRepos;
+    public UserRepoRVAdapter() {
     }
 
     public void add(List<RepoEntity> userRepos){
