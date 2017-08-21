@@ -1,6 +1,10 @@
 package com.alexkaz.myrepos.di.modules;
 
+import android.content.Context;
+
 import com.alexkaz.myrepos.model.api.GithubApi;
+import com.alexkaz.myrepos.model.services.ConnInfoHelper;
+import com.alexkaz.myrepos.model.services.ConnInfoHelperImpl;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -39,6 +43,12 @@ public class NetworkModule {
                     .build();
             return chain.proceed(request);
         }).build();
+    }
+
+    @Provides
+    @Singleton
+    ConnInfoHelper provideConnInfoHelper(Context context){
+        return new ConnInfoHelperImpl(context);
     }
 
 }

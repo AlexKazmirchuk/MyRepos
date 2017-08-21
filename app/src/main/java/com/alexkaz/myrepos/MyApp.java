@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.alexkaz.myrepos.di.components.DaggerMyComponent;
 import com.alexkaz.myrepos.di.components.MyComponent;
+import com.alexkaz.myrepos.di.modules.AppModule;
 
 public class MyApp extends Application {
 
@@ -12,7 +13,9 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        myComponent = DaggerMyComponent.builder().build();
+        myComponent = DaggerMyComponent.builder()
+                .appModule(new AppModule(this))
+                .build();
     }
 
     public MyComponent getMyComponent(){
