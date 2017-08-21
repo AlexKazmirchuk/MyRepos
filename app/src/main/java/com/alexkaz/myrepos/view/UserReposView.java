@@ -10,8 +10,14 @@ public interface UserReposView {
 
     void showLoading();
 
-    void showErrorMessage();
+    void showErrorMessage(String message);
 
     void showNoConnectionMessage();
+
+    void hideLoading();
+
+    void hideNoConnectionMessage();
+
+    void hideRepos();
 
 }

@@ -6,7 +6,6 @@ import com.alexkaz.myrepos.view.UserReposView;
 public class UserReposPresenterImpl implements UserReposPresenter {
 
     private UserReposView view;
-
     private GithubService githubService;
 
     public UserReposPresenterImpl(GithubService githubService) {
@@ -20,7 +19,14 @@ public class UserReposPresenterImpl implements UserReposPresenter {
 
     @Override
     public void loadRepos() {
-        //todo impl later
+        view.showLoading();
+        githubService.getUserRepos().subscribe(repos -> {
+            view.hideLoading();
+            view.showRepos(repos);
+        }, throwable -> {
+            view.hideLoading();
+            view.showErrorMessage(throwable.getMessage());
+        });
     }
 
     @Override
