@@ -46,7 +46,6 @@ public class GithubApiTest {
                 .build().create(GithubApi.class);
     }
 
-
     @Test
     public void testGetUserRepos() {
         githubApi.getUserRepos()
@@ -61,6 +60,14 @@ public class GithubApiTest {
         githubApi.getReposByName("tetris")
                 .subscribe(searchReposWrapper -> {
                     assertThat(searchReposWrapper,notNullValue());
+                }, Throwable::printStackTrace);
+    }
+
+    @Test
+    public void testGetUser(){
+        githubApi.getUser()
+                .subscribe(user -> {
+                    assertThat(user, notNullValue());
                 }, Throwable::printStackTrace);
     }
 }

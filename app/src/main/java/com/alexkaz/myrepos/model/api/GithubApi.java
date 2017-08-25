@@ -2,6 +2,7 @@ package com.alexkaz.myrepos.model.api;
 
 import com.alexkaz.myrepos.model.entities.RepoEntity;
 import com.alexkaz.myrepos.model.entities.SearchReposWrapper;
+import com.alexkaz.myrepos.model.entities.UserEntity;
 
 import java.util.List;
 
@@ -25,4 +26,6 @@ public interface GithubApi {
     @GET("search/repositories")
     Observable<SearchReposWrapper> getReposByName(@Query("q") String name,@Query("page") int page, @Query("per_page") int perPage);
 
+    @GET("user")
+    Observable<UserEntity> getUser();
 }

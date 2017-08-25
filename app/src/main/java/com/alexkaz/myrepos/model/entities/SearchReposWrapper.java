@@ -13,7 +13,7 @@ public class SearchReposWrapper {
     private boolean incompleteResults;
 
     @SerializedName("items")
-    private List<SearchRepo> items = null;
+    private List<RepoEntity> items = null;
 
     public SearchReposWrapper() {
     }
@@ -34,11 +34,11 @@ public class SearchReposWrapper {
         this.incompleteResults = incompleteResults;
     }
 
-    public List<SearchRepo> getItems() {
+    public List<RepoEntity> getItems() {
         return items;
     }
 
-    public void setItems(List<SearchRepo> items) {
+    public void setItems(List<RepoEntity> items) {
         this.items = items;
     }
 

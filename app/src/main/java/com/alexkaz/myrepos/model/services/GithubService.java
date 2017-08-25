@@ -3,6 +3,7 @@ package com.alexkaz.myrepos.model.services;
 import com.alexkaz.myrepos.model.api.GithubApi;
 import com.alexkaz.myrepos.model.entities.RepoEntity;
 import com.alexkaz.myrepos.model.entities.SearchReposWrapper;
+import com.alexkaz.myrepos.model.entities.UserEntity;
 
 import java.util.List;
 
@@ -41,6 +42,12 @@ public class GithubService {
 
     public Observable<SearchReposWrapper> getReposByName(String name, int page, int perPage){
         return githubApi.getReposByName(name, page, perPage)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<UserEntity> getUser(){
+        return githubApi.getUser()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
