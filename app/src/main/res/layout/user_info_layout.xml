@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#15242D">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:id="@+id/userImgDiv"
+            android:layout_width="135dp"
+            android:layout_height="120dp"
+            android:background="#7b0000"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/circle"/>
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/userNameTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chris Banes"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:layout_toEndOf="@id/userImgDiv"
+            android:layout_alignParentTop="true"
+            android:textSize="20sp"
+            android:background="#121212"
+            android:layout_marginRight="20dp"/>
+
+        <ImageView
+            android:id="@+id/userBioIV"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_bio"
+            android:layout_below="@id/userNameTV"
+            android:layout_toEndOf="@id/userImgDiv"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp"
+            android:background="#413838"/>
+
+        <TextView
+            android:id="@+id/userBioTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Stay hungry, stay foolish. Keep learning"
+            android:textColor="#ffffff"
+            android:layout_toEndOf="@id/userBioIV"
+            android:layout_alignTop="@id/userBioIV"
+            android:layout_alignEnd="@id/userNameTV"
+            android:layout_marginBottom="5dp"
+            android:background="#214920"/>
+
+        <TextView
+            android:id="@+id/userLocationTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="New York"
+            android:textColor="#ffffff"
+            android:layout_alignStart="@id/userBioTV"
+            android:layout_below="@id/userBioTV"
+            android:layout_alignEnd="@id/userNameTV"
+            android:layout_marginBottom="5dp"
+            android:background="#545454" />
+
+        <ImageView
+            android:id="@+id/userLocationIV"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_location"
+            android:layout_alignLeft="@id/userBioIV"
+            android:layout_alignTop="@id/userLocationTV"
+            android:background="#151587" />
+
+        <TextView
+            android:id="@+id/userLinkTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="http://chris.banes.me"
+            android:textColor="#ffffff"
+            android:layout_alignStart="@id/userLocationTV"
+            android:layout_below="@id/userLocationTV"
+            android:layout_alignEnd="@id/userNameTV"
+            android:background="#641051" />
+
+        <ImageView
+            android:id="@+id/userLinkIV"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_links"
+            android:layout_alignStart="@id/userBioIV"
+            android:layout_alignTop="@id/userLinkTV"
+            android:background="#038232" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:background="#45afc4">
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_followers"
+            android:layout_marginEnd="10dp"
+            android:background="#4f5131" />
+
+        <TextView
+            android:id="@+id/userFollowersCountTV"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="54"
+            android:layout_marginEnd="50dp"
+            android:textColor="#ffffff"
+            android:gravity="center" />
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_stars"
+            android:layout_marginEnd="10dp"
+            android:background="#4f5131"/>
+
+        <TextView
+            android:id="@+id/userStarsCountTV"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="454"
+            android:textColor="#ffffff"
+            android:gravity="center" />
+    </LinearLayout>
+</LinearLayout>
+
+
