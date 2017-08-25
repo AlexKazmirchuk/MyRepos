@@ -39,63 +39,15 @@
             android:textSize="20sp"
             android:layout_marginRight="20dp"/>
 
-        <ImageView
-            android:id="@+id/userBioIV"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_bio"
+        <LinearLayout
+            android:id="@+id/userInfoItemDiv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
             android:layout_below="@id/userNameTV"
             android:layout_toEndOf="@id/userImgDiv"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="5dp"/>
-
-        <TextView
-            android:id="@+id/userBioTV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Stay hungry, stay foolish. Keep learning"
-            android:textColor="#ffffff"
-            android:layout_toEndOf="@id/userBioIV"
-            android:layout_alignTop="@id/userBioIV"
-            android:layout_alignEnd="@id/userNameTV"
-            android:layout_marginBottom="5dp"/>
-
-        <TextView
-            android:id="@+id/userLocationTV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="New York"
-            android:textColor="#ffffff"
-            android:layout_alignStart="@id/userBioTV"
-            android:layout_below="@id/userBioTV"
-            android:layout_alignEnd="@id/userNameTV"
-            android:layout_marginBottom="5dp" />
-
-        <ImageView
-            android:id="@+id/userLocationIV"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_location"
-            android:layout_alignLeft="@id/userBioIV"
-            android:layout_alignTop="@id/userLocationTV" />
-
-        <TextView
-            android:id="@+id/userLinkTV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="http://chris.banes.me"
-            android:textColor="#ffffff"
-            android:layout_alignStart="@id/userLocationTV"
-            android:layout_below="@id/userLocationTV"
             android:layout_alignEnd="@id/userNameTV" />
-
-        <ImageView
-            android:id="@+id/userLinkIV"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_links"
-            android:layout_alignStart="@id/userBioIV"
-            android:layout_alignTop="@id/userLinkTV" />
 
     </RelativeLayout>
     <LinearLayout
