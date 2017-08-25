@@ -56,4 +56,19 @@ public class UserReposPresenterImpl implements UserReposPresenter {
             view.showErrorMessage("No internet connection!");
         }
     }
+
+    @Override
+    public void userInfo() {
+        if (helper.isOnline()){
+            view.showLoading();
+            githubService.getUser().subscribe(user -> {
+                view.showUserInfo(user);
+            }, throwable -> {
+                view.hideLoading();
+                view.showErrorMessage(throwable.getMessage());
+            });
+        } else {
+            view.showErrorMessage("No internet connection!");
+        }
+    }
 }

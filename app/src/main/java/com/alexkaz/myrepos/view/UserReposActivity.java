@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.alexkaz.myrepos.MyApp;
 import com.alexkaz.myrepos.R;
 import com.alexkaz.myrepos.model.entities.RepoEntity;
+import com.alexkaz.myrepos.model.entities.UserEntity;
 import com.alexkaz.myrepos.presenter.UserReposPresenter;
 import com.alexkaz.myrepos.ui.UserRepoRVAdapter;
 import com.paginate.Paginate;
@@ -82,6 +83,11 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
                 .setLoadingTriggerThreshold(1)
                 .addLoadingListItem(false)
                 .build();
+    }
+
+    @Override
+    public void showUserInfo(UserEntity user) {
+        // todo impl later
     }
 
     @Override
