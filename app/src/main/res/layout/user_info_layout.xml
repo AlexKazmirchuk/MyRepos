@@ -43,7 +43,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
             android:layout_below="@id/userNameTV"
             android:layout_toEndOf="@id/userImgDiv"
             android:layout_alignEnd="@id/userNameTV" />
