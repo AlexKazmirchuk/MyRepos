@@ -58,7 +58,7 @@ public class UserReposPresenterImpl implements UserReposPresenter {
     }
 
     @Override
-    public void userInfo() {
+    public void loadUserInfo() {
         if (helper.isOnline()){
             view.showLoading();
             githubService.getUser().subscribe(user -> {

@@ -10,6 +10,6 @@ public interface UserReposPresenter {
 
     void loadNextPage();
 
-    void userInfo();
+    void loadUserInfo();
 
 }

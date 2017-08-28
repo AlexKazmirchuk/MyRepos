@@ -20,10 +20,13 @@ public class UserEntity {
     private String location;
 
     @SerializedName("email")
-    private Object email;
+    private String email;
 
     @SerializedName("bio")
-    private Object bio;
+    private String bio;
+
+    @SerializedName("blog")
+    private String blog;
 
     @SerializedName("public_repos")
     private int publicRepos;
@@ -77,19 +80,19 @@ public class UserEntity {
         this.location = location;
     }
 
-    public Object getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(Object email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public Object getBio() {
+    public String getBio() {
         return bio;
     }
 
-    public void setBio(Object bio) {
+    public void setBio(String bio) {
         this.bio = bio;
     }
 
@@ -125,4 +128,11 @@ public class UserEntity {
         this.following = following;
     }
 
+    public String getBlog() {
+        return blog;
+    }
+
+    public void setBlog(String blog) {
+        this.blog = blog;
+    }
 }

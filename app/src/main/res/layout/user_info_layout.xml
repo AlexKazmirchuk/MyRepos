@@ -18,20 +18,19 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true">
             <ImageView
+                android:id="@+id/userPhotoIV"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/circle"
-                android:padding="4dp"
-                android:src="@drawable/user_img_demo" />
+                android:padding="4dp" />
         </FrameLayout>
 
         <TextView
             android:id="@+id/userNameTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Chris Banes"
             android:textColor="#ffffff"
             android:textStyle="bold"
             android:layout_toEndOf="@id/userImgDiv"
@@ -67,7 +66,6 @@
             android:id="@+id/userFollowersCountTV"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="54"
             android:layout_marginEnd="50dp"
             android:textColor="#ffffff"
             android:gravity="center" />
@@ -75,14 +73,14 @@
         <ImageView
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:src="@drawable/ic_stars"
+            android:src="@drawable/ic_repo"
+            android:padding="3dp"
             android:layout_marginEnd="10dp"/>
 
         <TextView
-            android:id="@+id/userStarsCountTV"
+            android:id="@+id/userReposCountTV"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="454"
             android:textColor="#ffffff"
             android:gravity="center" />
     </LinearLayout>
