@@ -11,6 +11,8 @@ public interface UserReposView {
 
     void showRepos(List<RepoEntity> userRepos);
 
+    void clearUpList();
+
     void showLoading();
 
     void showErrorMessage(String message);

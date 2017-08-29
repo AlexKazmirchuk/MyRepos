@@ -25,6 +25,10 @@ public class UserRepoRVAdapter extends RecyclerView.Adapter<UserRepoRVAdapter.Us
         }
     }
 
+    public void clear(){
+        userRepos.clear();
+    }
+
     @Override
     public UserRepoVH onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())

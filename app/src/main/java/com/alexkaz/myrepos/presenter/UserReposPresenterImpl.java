@@ -28,6 +28,15 @@ public class UserReposPresenterImpl implements UserReposPresenter {
     }
 
     @Override
+    public void refresh() {
+        if (!userInfoLoaded){
+            loadUserInfo();
+        }
+        page = 1;
+        view.clearUpList();
+    }
+
+    @Override
     public void loadNextPage() {
         if (helper.isOnline()){
             view.showLoading();

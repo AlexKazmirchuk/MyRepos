@@ -113,14 +113,12 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
 //                startActivity(intent);
                 return true;
             case R.id.action_refresh:
-//                todo refresh list or info and list
+                presenter.refresh();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
-
 
     @Override
     public void showUserInfo(UserEntity user) {
@@ -137,6 +135,13 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
         repoListRV.setVisibility(View.VISIBLE);
         adapter.notifyDataSetChanged();
         loadingInProgress = false;
+    }
+
+    @Override
+    public void clearUpList() {
+        adapter.clear();
+        adapter.notifyDataSetChanged();
+        hasLoadedAllItems = false;
     }
 
     @Override
