@@ -13,6 +13,9 @@ public class UserReposPresenterImpl implements UserReposPresenter {
     private int page = 1;
     private int perPage = 8;
 
+    private boolean userInfoLoaded;
+    private boolean repoListLoaded;
+
     public UserReposPresenterImpl(GithubService githubService, ConnInfoHelper connInfoHelper) {
         this.githubService = githubService;
         this.helper = connInfoHelper;
@@ -21,23 +24,7 @@ public class UserReposPresenterImpl implements UserReposPresenter {
     @Override
     public void bindView(UserReposView view) {
         this.view = view;
-    }
-
-    @Override
-    public void loadRepos() {
-        if (helper.isOnline()){
-            view.showLoading();
-            githubService.getUserRepos().subscribe(repos -> {
-                view.hideLoading();
-                view.showRepos(repos);
-            }, throwable -> {
-                view.hideLoading();
-                view.showErrorMessage(throwable.getMessage());
-            });
-        } else {
-            view.hideRepos();
-            view.showNoConnectionMessage();
-        }
+        page = 1;
     }
 
     @Override
@@ -45,9 +32,14 @@ public class UserReposPresenterImpl implements UserReposPresenter {
         if (helper.isOnline()){
             view.showLoading();
             githubService.getUserRepos(page, perPage).subscribe(repos -> {
-                view.hideLoading();
+                repoListLoaded = true;
                 view.showRepos(repos);
                 page++;
+                if (userInfoLoaded){
+                    view.hideLoading();
+                } else {
+                    view.hideRepos();
+                }
             }, throwable -> {
                 view.hideLoading();
                 view.showErrorMessage(throwable.getMessage());
@@ -63,6 +55,11 @@ public class UserReposPresenterImpl implements UserReposPresenter {
             view.showLoading();
             githubService.getUser().subscribe(user -> {
                 view.showUserInfo(user);
+                userInfoLoaded = true;
+                if (repoListLoaded){
+                    view.hideLoading();
+                    view.showRepos(null);
+                }
             }, throwable -> {
                 view.hideLoading();
                 view.showErrorMessage(throwable.getMessage());
