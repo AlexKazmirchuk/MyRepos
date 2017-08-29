@@ -40,6 +40,9 @@ public class UserEntity {
     @SerializedName("following")
     private int following;
 
+    @SerializedName("company")
+    private String company;
+
     public String getLogin() {
         return login;
     }
@@ -134,5 +137,13 @@ public class UserEntity {
 
     public void setBlog(String blog) {
         this.blog = blog;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 }

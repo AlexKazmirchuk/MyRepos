@@ -13,6 +13,9 @@ public class UserInfoItemView extends LinearLayout {
     public static final int BIO = 0;
     public static final int LOCATION = 1;
     public static final int LINK = 2;
+    public static final int COMPANY = 3;
+    public static final int EMAIL = 4;
+
 
     private ImageView imageView;
     private TextView textView;
@@ -36,6 +39,12 @@ public class UserInfoItemView extends LinearLayout {
                 break;
             case LINK:
                 imageView.setImageResource(R.drawable.ic_links);
+                break;
+            case COMPANY:
+                imageView.setImageResource(R.drawable.ic_company);
+                break;
+            case EMAIL:
+                imageView.setImageResource(R.drawable.ic_letter);
                 break;
             default:
                 throw new IllegalArgumentException();

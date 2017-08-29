@@ -60,6 +60,12 @@ public class UserInfoView extends LinearLayout {
         if (user.getBlog() != null && !(user.getBlog().equals(""))){
             userInfoItemDiv.addView(new UserInfoItemView(getContext(), UserInfoItemView.LINK, user.getBlog()));
         }
+        if (user.getCompany() != null && !(user.getCompany().equals(""))){
+            userInfoItemDiv.addView(new UserInfoItemView(getContext(), UserInfoItemView.COMPANY, user.getCompany()));
+        }
+        if (user.getEmail() != null && !(user.getEmail().equals(""))){
+            userInfoItemDiv.addView(new UserInfoItemView(getContext(), UserInfoItemView.EMAIL, user.getEmail()));
+        }
 
         userFollowersCountTV.setText(String.valueOf(user.getFollowers()));
         userReposCountTV.setText(String.valueOf(user.getPublicRepos()));
