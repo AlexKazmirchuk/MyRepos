@@ -6,8 +6,6 @@ public interface UserReposPresenter {
 
     void bindView(UserReposView view);
 
-    void loadRepos();
-
     void loadNextPage();
 
     void loadUserInfo();

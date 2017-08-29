@@ -15,9 +15,6 @@ public interface GithubApi {
     String END_POINT = "https://api.github.com/";
 
     @GET("user/repos")
-    Observable<List<RepoEntity>> getUserRepos();
-
-    @GET("user/repos")
     Observable<List<RepoEntity>> getUserRepos(@Query("page") int page, @Query("per_page") int perPage);
 
     @GET("search/repositories")

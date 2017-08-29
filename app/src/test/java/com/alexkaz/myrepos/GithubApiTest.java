@@ -48,7 +48,7 @@ public class GithubApiTest {
 
     @Test
     public void testGetUserRepos() {
-        githubApi.getUserRepos()
+        githubApi.getUserRepos(1,8)
                 .subscribe((repoEntities) -> {
                     assertThat(repoEntities.size(),is(10));
                 }, Throwable::printStackTrace);

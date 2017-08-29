@@ -22,12 +22,6 @@ public class GithubService {
         this.githubApi = githubApi;
     }
 
-    public Observable<List<RepoEntity>> getUserRepos(){
-        return githubApi.getUserRepos()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-    }
-
     public Observable<List<RepoEntity>> getUserRepos(int page, int perPage){
         return githubApi.getUserRepos(page, perPage)
                 .subscribeOn(Schedulers.io())
