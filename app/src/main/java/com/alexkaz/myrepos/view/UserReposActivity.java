@@ -1,9 +1,12 @@
 package com.alexkaz.myrepos.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -94,6 +97,30 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
                 .addLoadingListItem(false)
                 .build();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.user_repos_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.action_search:
+//                Intent intent = new Intent(this, RepoSearchActivity.class);
+//                startActivity(intent);
+                return true;
+            case R.id.action_refresh:
+//                todo refresh list or info and list
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
 
     @Override
     public void showUserInfo(UserEntity user) {
