@@ -103,9 +103,11 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
 
     @Override
     public void showRepos(List<RepoEntity> userRepos) {
-        if (userRepos.size() == 0 || userRepos.size() < 8){hasLoadedAllItems = true;}
+        if (userRepos != null){
+            if (userRepos.size() == 0 || userRepos.size() < 8){hasLoadedAllItems = true;}
+            adapter.add(userRepos);
+        }
         repoListRV.setVisibility(View.VISIBLE);
-        adapter.add(userRepos);
         adapter.notifyDataSetChanged();
         loadingInProgress = false;
     }

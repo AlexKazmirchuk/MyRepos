@@ -20,7 +20,9 @@ public class UserRepoRVAdapter extends RecyclerView.Adapter<UserRepoRVAdapter.Us
     }
 
     public void add(List<RepoEntity> userRepos){
-        this.userRepos.addAll(userRepos);
+        if (userRepos != null){
+            this.userRepos.addAll(userRepos);
+        }
     }
 
     @Override
