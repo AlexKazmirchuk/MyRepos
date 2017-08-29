@@ -20,7 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.UserReposActivity"></activity>
+        <activity android:name=".view.UserReposActivity" />
+        <activity android:name=".SearchReposActivity"></activity>
     </application>
 
 </manifest>
