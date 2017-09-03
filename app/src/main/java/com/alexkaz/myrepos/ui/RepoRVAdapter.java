@@ -12,11 +12,11 @@ import com.alexkaz.myrepos.model.entities.RepoEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserRepoRVAdapter extends RecyclerView.Adapter<UserRepoRVAdapter.UserRepoVH> {
+public class RepoRVAdapter extends RecyclerView.Adapter<RepoRVAdapter.UserRepoVH> {
 
     private List<RepoEntity> userRepos = new ArrayList<>();
 
-    public UserRepoRVAdapter() {
+    public RepoRVAdapter() {
     }
 
     public void add(List<RepoEntity> userRepos){

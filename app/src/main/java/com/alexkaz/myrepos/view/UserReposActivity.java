@@ -16,7 +16,7 @@ import com.alexkaz.myrepos.model.entities.RepoEntity;
 import com.alexkaz.myrepos.model.entities.UserEntity;
 import com.alexkaz.myrepos.presenter.UserReposPresenter;
 import com.alexkaz.myrepos.ui.UserInfoView;
-import com.alexkaz.myrepos.ui.UserRepoRVAdapter;
+import com.alexkaz.myrepos.ui.RepoRVAdapter;
 import com.paginate.Paginate;
 
 import java.util.List;
@@ -31,7 +31,7 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
     private View noConnView;
     private ProgressBar progressBar;
     private RecyclerView repoListRV;
-    private UserRepoRVAdapter adapter;
+    private RepoRVAdapter adapter;
     private UserInfoView userInfoView;
 
     private boolean loadingInProgress = false;
@@ -69,7 +69,7 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
 
     private void initRecyclerView() {
         repoListRV = findViewById(R.id.repoListRV);
-        adapter = new UserRepoRVAdapter();
+        adapter = new RepoRVAdapter();
         repoListRV.setLayoutManager(new LinearLayoutManager(this));
         repoListRV.setAdapter(adapter);
 

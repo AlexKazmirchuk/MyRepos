@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.UserReposActivity" />
-        <activity android:name=".SearchReposActivity"></activity>
+        <activity android:name=".view.SearchReposActivity"></activity>
     </application>
 
 </manifest>
