@@ -61,7 +61,6 @@ public class SearchReposActivity extends AppCompatActivity implements SearchRepo
     }
 
     private void initRecyclerView(){
-        //todo implement later
         searchReposRV = findViewById(R.id.searchReposRV);
         adapter = new RepoRVAdapter();
         searchReposRV.setLayoutManager(new LinearLayoutManager(this));

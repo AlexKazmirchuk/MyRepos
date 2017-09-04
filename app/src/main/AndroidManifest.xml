@@ -21,7 +21,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.UserReposActivity" />
-        <activity android:name=".view.SearchReposActivity"></activity>
+        <activity android:name=".view.SearchReposActivity" />
+        <activity
+            android:name=".view.BasicAuthActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
     </application>
 
 </manifest>

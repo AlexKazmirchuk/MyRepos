@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.alexkaz.myrepos.view.BasicAuthActivity;
 import com.alexkaz.myrepos.view.UserReposActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,7 +17,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void click(View view){
-        Intent intent = new Intent(this,UserReposActivity.class);
-        startActivity(intent);
+        if (view.getId() == R.id.userReposBtn){
+            startActivity(new Intent(this,UserReposActivity.class));
+        }
+        if (view.getId() == R.id.authBtn){
+            startActivity(new Intent(this,BasicAuthActivity.class));
+        }
     }
 }
