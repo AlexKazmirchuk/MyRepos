@@ -6,7 +6,11 @@ import java.util.List;
 
 public interface SearchReposView {
 
+    String getQueryText();
+
     void showRepos(List<RepoEntity> userRepos);
+
+    void clearUpList();
 
     void showLoading();
 

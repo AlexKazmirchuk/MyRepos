@@ -1,22 +1,19 @@
 package com.alexkaz.myrepos.view;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.alexkaz.myrepos.MyApp;
 import com.alexkaz.myrepos.R;
 import com.alexkaz.myrepos.model.entities.RepoEntity;
-import com.alexkaz.myrepos.model.entities.UserEntity;
-import com.alexkaz.myrepos.presenter.UserReposPresenter;
-import com.alexkaz.myrepos.ui.UserInfoView;
+import com.alexkaz.myrepos.presenter.SearchReposPresenter;
 import com.alexkaz.myrepos.ui.RepoRVAdapter;
 import com.paginate.Paginate;
 
@@ -24,61 +21,59 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class UserReposActivity extends AppCompatActivity implements UserReposView {
+public class SearchReposActivity extends AppCompatActivity implements SearchReposView {
 
     @Inject
-    UserReposPresenter presenter;
+    SearchReposPresenter presenter;
 
-    private View noConnView;
-    private ProgressBar progressBar;
-    private RecyclerView repoListRV;
+    private ImageButton searchBtn;
+    private EditText searchET;
+    private RecyclerView searchReposRV;
     private RepoRVAdapter adapter;
-    private UserInfoView userInfoView;
+    private ProgressBar searchReposPB;
+    private View noConnView;
 
     private boolean loadingInProgress = false;
     private boolean hasLoadedAllItems = false;
+    private boolean searchBtnPressed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_repos);
+        setContentView(R.layout.activity_search_repos);
 
-        configureActionBar();
         initComponents();
-        presenter.loadUserInfo();
-    }
-
-    private void configureActionBar(){
-        if (getSupportActionBar() != null){
-            getSupportActionBar().setElevation(0);
-        }
     }
 
     private void initComponents(){
-        progressBar = findViewById(R.id.userReposPB);
+        searchET = findViewById(R.id.searchET);
+        searchReposPB = findViewById(R.id.searchReposPB);
         noConnView = findViewById(R.id.noConnLayout);
-        userInfoView = findViewById(R.id.userInfoView);
 
         initPresenter();
         initRecyclerView();
+        initButton();
     }
 
-    private void initPresenter() {
+    private void initPresenter(){
         ((MyApp)getApplication()).getMyComponent().inject(this);
         presenter.bindView(this);
     }
 
-    private void initRecyclerView() {
-        repoListRV = findViewById(R.id.repoListRV);
+    private void initRecyclerView(){
+        //todo implement later
+        searchReposRV = findViewById(R.id.searchReposRV);
         adapter = new RepoRVAdapter();
-        repoListRV.setLayoutManager(new LinearLayoutManager(this));
-        repoListRV.setAdapter(adapter);
+        searchReposRV.setLayoutManager(new LinearLayoutManager(this));
+        searchReposRV.setAdapter(adapter);
 
         Paginate.Callbacks callbacks = new Paginate.Callbacks() {
             @Override
             public void onLoadMore() {
-                presenter.loadNextPage();
-                loadingInProgress = true;
+                if (searchBtnPressed){
+                    presenter.load();
+                    loadingInProgress = true;
+                }
             }
 
             @Override
@@ -92,38 +87,23 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
             }
         };
 
-        Paginate.with(repoListRV, callbacks)
+        Paginate.with(searchReposRV, callbacks)
                 .setLoadingTriggerThreshold(1)
                 .addLoadingListItem(false)
                 .build();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.user_repos_menu, menu);
-        return true;
+    private void initButton() {
+        searchBtn = findViewById(R.id.searchBtn);
+        searchBtn.setOnClickListener(event ->{
+            presenter.search();
+            searchBtnPressed = true;
+        });
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()){
-            case R.id.action_search:
-                Intent intent = new Intent(this, SearchReposActivity.class);
-                startActivity(intent);
-                return true;
-            case R.id.action_refresh:
-                presenter.refresh();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public void showUserInfo(UserEntity user) {
-        userInfoView.setValues(user);
-        userInfoView.show();
+    public String getQueryText() {
+        return searchET.getText().toString();
     }
 
     @Override
@@ -132,7 +112,7 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
             if (userRepos.size() == 0 || userRepos.size() < 8){hasLoadedAllItems = true;}
             adapter.add(userRepos);
         }
-        repoListRV.setVisibility(View.VISIBLE);
+        searchReposRV.setVisibility(View.VISIBLE);
         adapter.notifyDataSetChanged();
         loadingInProgress = false;
     }
@@ -146,7 +126,7 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
 
     @Override
     public void showLoading() {
-        progressBar.setVisibility(View.VISIBLE);
+        searchReposPB.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -161,7 +141,7 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
 
     @Override
     public void hideLoading() {
-        progressBar.setVisibility(View.INVISIBLE);
+        searchReposPB.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -171,6 +151,6 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
 
     @Override
     public void hideRepos() {
-        repoListRV.setVisibility(View.INVISIBLE);
+        searchReposRV.setVisibility(View.INVISIBLE);
     }
 }

@@ -6,7 +6,7 @@ public interface SearchReposPresenter {
 
     void bindView(SearchReposView view);
 
-    void load(String query);
+    void load();
 
-    void loadMore();
+    void search();
 }
