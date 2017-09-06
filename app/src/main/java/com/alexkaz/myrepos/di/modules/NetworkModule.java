@@ -2,9 +2,11 @@ package com.alexkaz.myrepos.di.modules;
 
 import android.content.Context;
 
+import com.alexkaz.myrepos.model.api.BasicAuthApi;
 import com.alexkaz.myrepos.model.api.GithubApi;
 import com.alexkaz.myrepos.model.services.ConnInfoHelper;
 import com.alexkaz.myrepos.model.services.ConnInfoHelperImpl;
+import com.alexkaz.myrepos.model.services.PrefsHelper;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -33,12 +35,15 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    OkHttpClient provideHttpClient(@Named("token")String token){
+    OkHttpClient provideHttpClient(PrefsHelper prefsHelper){
+
+        String token = prefsHelper.getToken();
+
         return new OkHttpClient.Builder().addInterceptor(chain -> {
             Request original = chain.request();
 
             Request request = original.newBuilder()
-                    .header("Authorization", "token " + token)
+                    .header("Authorization", token)
                     .method(original.method(), original.body())
                     .build();
             return chain.proceed(request);
@@ -51,4 +56,12 @@ public class NetworkModule {
         return new ConnInfoHelperImpl(context);
     }
 
+    @Provides
+    @Singleton
+    BasicAuthApi provideBasicAuthApi(){
+        return new Retrofit.Builder()
+                .baseUrl(BasicAuthApi.END_POINT)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build().create(BasicAuthApi.class);
+    }
 }
