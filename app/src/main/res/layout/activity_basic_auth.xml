@@ -1,58 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1A303D"
     tools:context="com.alexkaz.myrepos.view.BasicAuthActivity">
 
-    <TextView
-        android:id="@+id/loginAppTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="My repos viewer"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:textColor="#5C7B8B"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="25dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#1A303D">
 
-    <ImageView
-        android:id="@+id/loginIV"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/ic_login"
-        android:layout_below="@id/loginAppTitle"
-        android:layout_centerHorizontal="true"/>
+        <TextView
+            android:id="@+id/loginAppTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My repos viewer"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="#5C7B8B"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"/>
 
-    <EditText
-        android:id="@+id/userNameET"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/loginIV"
-        android:layout_centerHorizontal="true"
-        android:text="username"/>
-    <EditText
-        android:id="@+id/passwordET"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/userNameET"
-        android:layout_centerHorizontal="true"
-        android:inputType="textPassword"
-        android:text="password"/>
+        <ImageView
+            android:id="@+id/loginIV"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_login"
+            android:layout_below="@id/loginAppTitle"
+            android:layout_centerHorizontal="true"/>
 
-    <Button
-        android:id="@+id/loginBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign In"
-        android:layout_below="@id/passwordET"
-        android:layout_alignStart="@id/passwordET"
-        android:layout_alignEnd="@id/passwordET" />
+        <EditText
+            android:id="@+id/userNameET"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/loginIV"
+            android:layout_centerHorizontal="true"
+            android:text="username"/>
 
-</RelativeLayout>
+        <EditText
+            android:id="@+id/passwordET"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/userNameET"
+            android:layout_centerHorizontal="true"
+            android:inputType="textPassword"
+            android:text="password"/>
+
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign In"
+            android:layout_below="@id/passwordET"
+            android:layout_alignStart="@id/passwordET"
+            android:layout_alignEnd="@id/passwordET" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/loginPBDiv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#76121212"
+        android:visibility="invisible">
+
+        <ProgressBar
+            android:id="@+id/loginPB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+
+    </FrameLayout>
+
+</FrameLayout>

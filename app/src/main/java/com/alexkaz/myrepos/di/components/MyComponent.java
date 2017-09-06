@@ -4,6 +4,7 @@ import com.alexkaz.myrepos.di.modules.AppModule;
 import com.alexkaz.myrepos.di.modules.NetworkModule;
 import com.alexkaz.myrepos.di.modules.PreferencesModule;
 import com.alexkaz.myrepos.di.modules.PresenterModule;
+import com.alexkaz.myrepos.view.BasicAuthActivity;
 import com.alexkaz.myrepos.view.SearchReposActivity;
 import com.alexkaz.myrepos.view.UserReposActivity;
 
@@ -19,4 +20,5 @@ import dagger.Component;
 public interface MyComponent {
     void inject(UserReposActivity userReposActivity);
     void inject(SearchReposActivity searchReposActivity);
+    void inject(BasicAuthActivity basicAuthActivity);
 }
