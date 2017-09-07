@@ -3,6 +3,7 @@ package com.alexkaz.myrepos.di.modules;
 import android.content.Context;
 
 import com.alexkaz.myrepos.model.api.BasicAuthApi;
+import com.alexkaz.myrepos.model.api.Github0AuthApi;
 import com.alexkaz.myrepos.model.api.GithubApi;
 import com.alexkaz.myrepos.model.services.ConnInfoHelper;
 import com.alexkaz.myrepos.model.services.ConnInfoHelperImpl;
@@ -63,5 +64,14 @@ public class NetworkModule {
                 .baseUrl(BasicAuthApi.END_POINT)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(BasicAuthApi.class);
+    }
+
+    @Provides
+    @Singleton
+    Github0AuthApi provideGithub0AuthApi(){
+        return new Retrofit.Builder()
+                .baseUrl(Github0AuthApi.END_POINT)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build().create(Github0AuthApi.class);
     }
 }
