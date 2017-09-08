@@ -43,6 +43,7 @@ public class BasicAuthPresenterImpl implements BasicAuthPresenter {
                     if (response.isSuccessful()){
                         if (response.code() == 200){
                             prefsHelper.saveToken(Credentials.basic(username,password));
+                            prefsHelper.setAuthenticated(true);
                             view.authenticated();
                         } else {
                             view.showBadCredentialsError();

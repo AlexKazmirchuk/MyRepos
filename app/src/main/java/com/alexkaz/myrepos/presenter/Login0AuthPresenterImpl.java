@@ -43,6 +43,7 @@ public class Login0AuthPresenterImpl implements Login0AuthPresenter {
                     if (response.isSuccessful()){
                         String token = response.body().getAccessToken();
                         prefsHelper.saveToken("token " + token);
+                        prefsHelper.setAuthenticated(true);
                         view.authenticated();
                         Log.d("myTag", "token - " + token);
                     } else {
