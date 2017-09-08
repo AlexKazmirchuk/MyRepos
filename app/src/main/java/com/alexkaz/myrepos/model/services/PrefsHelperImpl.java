@@ -21,4 +21,14 @@ public class PrefsHelperImpl implements PrefsHelper {
     public String getToken() {
         return prefs.getString("token","");
     }
+
+    @Override
+    public void setAuthenticated(boolean authenticated) {
+        prefs.edit().putBoolean("authenticated", authenticated).apply();
+    }
+
+    @Override
+    public boolean isAuthenticated() {
+        return prefs.getBoolean("authenticated", false);
+    }
 }
