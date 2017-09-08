@@ -35,14 +35,6 @@ public class LoginTypeChooserActivity extends AppCompatActivity implements Login
         presenter.bindView(this);
     }
 
-    private void handleIntent(Intent intent) {
-        if (intent != null){
-            if (intent.getData() != null){
-                presenter.handleCode(intent.getData().getQueryParameter("code"));
-            }
-        }
-    }
-
     public void click(View view){
         if (view.getId() == R.id.oauthBtn){
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, GithubConfig.getOauthUrl());
@@ -50,6 +42,20 @@ public class LoginTypeChooserActivity extends AppCompatActivity implements Login
         }
         if (view.getId() == R.id.BasicBtn){
             startActivityForResult(new Intent(this,BasicAuthActivity.class), BASIC_AUTH_ACTIVITY);
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
+        if (intent != null){
+            if (intent.getData() != null){
+                presenter.handleCode(intent.getData().getQueryParameter("code"));
+            }
         }
     }
 
@@ -72,10 +78,19 @@ public class LoginTypeChooserActivity extends AppCompatActivity implements Login
     }
 
     @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        handleIntent(intent);
-        Toast.makeText(this,"intent received", Toast.LENGTH_LONG).show();
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("progressBar_showed", progressBarView.isShown());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle state) {
+        super.onRestoreInstanceState(state);
+        if (state.getBoolean("progressBar_showed", false)){
+            showLoading();
+        } else {
+            hideLoading();
+        }
     }
 
     @Override
@@ -87,6 +102,8 @@ public class LoginTypeChooserActivity extends AppCompatActivity implements Login
     @Override
     public void showLoading() {
         progressBarView.setVisibility(View.VISIBLE);
+        findViewById(R.id.oauthBtn).setEnabled(false);
+        findViewById(R.id.BasicBtn).setEnabled(false);
     }
 
     @Override
@@ -97,5 +114,7 @@ public class LoginTypeChooserActivity extends AppCompatActivity implements Login
     @Override
     public void hideLoading() {
         progressBarView.setVisibility(View.INVISIBLE);
+        findViewById(R.id.oauthBtn).setEnabled(true);
+        findViewById(R.id.BasicBtn).setEnabled(true);
     }
 }
