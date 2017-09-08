@@ -8,7 +8,7 @@ public interface BasicAuthView {
 
     void showErrorMessage(String message);
 
-    void showBadCredentialsError();
+    void showBadCredentialsError(String message);
 
     void hideLoading();
 }

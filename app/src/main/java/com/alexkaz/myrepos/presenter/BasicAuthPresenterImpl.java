@@ -1,12 +1,12 @@
 package com.alexkaz.myrepos.presenter;
 
-import android.util.Log;
-
 import com.alexkaz.myrepos.model.api.BasicAuthApi;
 import com.alexkaz.myrepos.model.entities.UserEntity;
 import com.alexkaz.myrepos.model.services.ConnInfoHelper;
 import com.alexkaz.myrepos.model.services.PrefsHelper;
 import com.alexkaz.myrepos.view.BasicAuthView;
+
+import java.io.IOException;
 
 import okhttp3.Credentials;
 import retrofit2.Call;
@@ -33,7 +33,6 @@ public class BasicAuthPresenterImpl implements BasicAuthPresenter {
 
     @Override
     public void login(String username, String password) {
-        //todo impl later
         if (connHelper.isOnline()){
             view.showLoading();
             authApi.checkCredentials(Credentials.basic(username,password)).enqueue(new Callback<UserEntity>() {
@@ -41,15 +40,11 @@ public class BasicAuthPresenterImpl implements BasicAuthPresenter {
                 public void onResponse(Call<UserEntity> call, Response<UserEntity> response) {
                     view.hideLoading();
                     if (response.isSuccessful()){
-                        if (response.code() == 200){
-                            prefsHelper.saveToken(Credentials.basic(username,password));
-                            prefsHelper.setAuthenticated(true);
-                            view.authenticated();
-                        } else {
-                            view.showBadCredentialsError();
-                        }
+                        prefsHelper.saveToken(Credentials.basic(username,password));
+                        prefsHelper.setAuthenticated(true);
+                        view.authenticated();
                     } else {
-                        view.showBadCredentialsError();
+                        view.showBadCredentialsError("Failed to sign in! Try again.");
                     }
                 }
 

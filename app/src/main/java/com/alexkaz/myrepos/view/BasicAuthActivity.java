@@ -1,8 +1,7 @@
 package com.alexkaz.myrepos.view;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,7 +40,9 @@ public class BasicAuthActivity extends AppCompatActivity implements BasicAuthVie
         loginBtn.setOnClickListener(event -> {
             String userName = userNameET.getText().toString();
             String password = passwordET.getText().toString();
-            presenter.login(userName,password);
+            if (validate(userName,password)){
+                presenter.login(userName,password);
+            }
         });
 
         initPresenter();
@@ -50,6 +51,23 @@ public class BasicAuthActivity extends AppCompatActivity implements BasicAuthVie
     private void initPresenter(){
         ((MyApp)getApplication()).getMyComponent().inject(this);
         presenter.bindView(this);
+    }
+
+    private boolean validate(String userName, String password){
+        if (userName.isEmpty() && password.isEmpty()){
+            showBadCredentialsError("Please enter the required fields!");
+            return false;
+        }
+
+        if (userName.isEmpty()){
+            showBadCredentialsError("Please enter username!");
+            return false;
+        }
+        if (password.isEmpty()){
+            showBadCredentialsError("Please enter password!");
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -65,13 +83,17 @@ public class BasicAuthActivity extends AppCompatActivity implements BasicAuthVie
     }
 
     @Override
-    public void showBadCredentialsError() {
-        //todo show that username or password is wrong
+    public void showBadCredentialsError(String message) {
+        // TODO: create custom toast message
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void showLoading() {
         progressBarDiv.setVisibility(View.VISIBLE);
+        loginBtn.setEnabled(false);
+        userNameET.setEnabled(false);
+        passwordET.setEnabled(false);
     }
 
     @Override
@@ -82,5 +104,8 @@ public class BasicAuthActivity extends AppCompatActivity implements BasicAuthVie
     @Override
     public void hideLoading() {
         progressBarDiv.setVisibility(View.INVISIBLE);
+        loginBtn.setEnabled(true);
+        userNameET.setEnabled(true);
+        passwordET.setEnabled(true);
     }
 }
