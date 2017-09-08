@@ -40,9 +40,7 @@ public class BasicAuthActivity extends AppCompatActivity implements BasicAuthVie
         loginBtn.setOnClickListener(event -> {
             String userName = userNameET.getText().toString();
             String password = passwordET.getText().toString();
-            if (validate(userName,password)){
-                presenter.login(userName,password);
-            }
+            presenter.login(userName,password);
         });
 
         initPresenter();
@@ -53,27 +51,30 @@ public class BasicAuthActivity extends AppCompatActivity implements BasicAuthVie
         presenter.bindView(this);
     }
 
-    private boolean validate(String userName, String password){
-        if (userName.isEmpty() && password.isEmpty()){
-            showBadCredentialsError("Please enter the required fields!");
-            return false;
-        }
-
-        if (userName.isEmpty()){
-            showBadCredentialsError("Please enter username!");
-            return false;
-        }
-        if (password.isEmpty()){
-            showBadCredentialsError("Please enter password!");
-            return false;
-        }
-        return true;
-    }
-
     @Override
     public void onBackPressed() {
         setResult(RESULT_CANCELED);
         super.onBackPressed();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("progressBar_showed", progressBarDiv.isShown());
+        outState.putString("username",userNameET.getText().toString());
+        outState.putString("password",passwordET.getText().toString());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle state) {
+        super.onRestoreInstanceState(state);
+        userNameET.setText(state.getString("username",""));
+        passwordET.setText(state.getString("password",""));
+        if (state.getBoolean("progressBar_showed", false)){
+            showLoading();
+        } else {
+            hideLoading();
+        }
     }
 
     @Override

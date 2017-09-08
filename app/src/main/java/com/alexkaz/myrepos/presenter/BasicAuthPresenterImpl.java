@@ -33,30 +33,48 @@ public class BasicAuthPresenterImpl implements BasicAuthPresenter {
 
     @Override
     public void login(String username, String password) {
-        if (connHelper.isOnline()){
-            view.showLoading();
-            authApi.checkCredentials(Credentials.basic(username,password)).enqueue(new Callback<UserEntity>() {
-                @Override
-                public void onResponse(Call<UserEntity> call, Response<UserEntity> response) {
-                    view.hideLoading();
-                    if (response.isSuccessful()){
-                        prefsHelper.saveToken(Credentials.basic(username,password));
-                        prefsHelper.setAuthenticated(true);
-                        view.authenticated();
-                    } else {
-                        view.showBadCredentialsError("Failed to sign in! Try again.");
+        if (validate(username,password)){
+            if (connHelper.isOnline()){
+                view.showLoading();
+                authApi.checkCredentials(Credentials.basic(username,password)).enqueue(new Callback<UserEntity>() {
+                    @Override
+                    public void onResponse(Call<UserEntity> call, Response<UserEntity> response) {
+                        view.hideLoading();
+                        if (response.isSuccessful()){
+                            prefsHelper.saveToken(Credentials.basic(username,password));
+                            prefsHelper.setAuthenticated(true);
+                            view.authenticated();
+                        } else {
+                            view.showBadCredentialsError("Failed to sign in! Try again.");
+                        }
                     }
-                }
 
-                @Override
-                public void onFailure(Call<UserEntity> call, Throwable t) {
-                    view.hideLoading();
-                    view.showErrorMessage(t.getMessage());
-                }
-            });
-        } else {
-            view.showErrorMessage("No internet connection!");
+                    @Override
+                    public void onFailure(Call<UserEntity> call, Throwable t) {
+                        view.hideLoading();
+                        view.showErrorMessage(t.getMessage());
+                    }
+                });
+            } else {
+                view.showErrorMessage("No internet connection!");
+            }
+        }
+    }
+
+    private boolean validate(String userName, String password){
+        if (userName.isEmpty() && password.isEmpty()){
+            view.showBadCredentialsError("Please enter the required fields!");
+            return false;
         }
 
+        if (userName.isEmpty()){
+            view.showBadCredentialsError("Please enter username!");
+            return false;
+        }
+        if (password.isEmpty()){
+            view.showBadCredentialsError("Please enter password!");
+            return false;
+        }
+        return true;
     }
 }
