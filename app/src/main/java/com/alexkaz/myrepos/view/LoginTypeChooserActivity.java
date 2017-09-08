@@ -20,10 +20,13 @@ public class LoginTypeChooserActivity extends AppCompatActivity implements Login
     @Inject
     Login0AuthPresenter presenter;
 
+    private View progressBarView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login_type_chooser);
+        progressBarView = findViewById(R.id.progressBarDiv);
         initPresenter();
     }
 
@@ -83,7 +86,7 @@ public class LoginTypeChooserActivity extends AppCompatActivity implements Login
 
     @Override
     public void showLoading() {
-        Toast.makeText(this,"Loading show",Toast.LENGTH_LONG).show();
+        progressBarView.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -93,6 +96,6 @@ public class LoginTypeChooserActivity extends AppCompatActivity implements Login
 
     @Override
     public void hideLoading() {
-        Toast.makeText(this,"Loading hide",Toast.LENGTH_LONG).show();
+        progressBarView.setVisibility(View.INVISIBLE);
     }
 }
