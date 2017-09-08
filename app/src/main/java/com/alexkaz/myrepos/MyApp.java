@@ -18,6 +18,12 @@ public class MyApp extends Application {
                 .build();
     }
 
+    public void recreateMyComponent(){
+        myComponent = DaggerMyComponent.builder()
+                .appModule(new AppModule(this))
+                .build();
+    }
+
     public MyComponent getMyComponent(){
         return myComponent;
     }

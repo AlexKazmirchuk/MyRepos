@@ -15,6 +15,7 @@ import com.alexkaz.myrepos.MyApp;
 import com.alexkaz.myrepos.R;
 import com.alexkaz.myrepos.model.entities.RepoEntity;
 import com.alexkaz.myrepos.model.entities.UserEntity;
+import com.alexkaz.myrepos.model.services.PrefsHelper;
 import com.alexkaz.myrepos.presenter.UserReposPresenter;
 import com.alexkaz.myrepos.ui.UserInfoView;
 import com.alexkaz.myrepos.ui.RepoRVAdapter;
@@ -26,8 +27,13 @@ import javax.inject.Inject;
 
 public class UserReposActivity extends AppCompatActivity implements UserReposView {
 
+    private static final int LOGIN_CHOOSER_ACTIVITY = 100;
+
     @Inject
     UserReposPresenter presenter;
+
+    @Inject
+    PrefsHelper prefsHelper;
 
     private View noConnView;
     private ProgressBar progressBar;
@@ -43,14 +49,24 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_repos);
 
+        ((MyApp)getApplication()).getMyComponent().inject(this);
         configureActionBar();
-        initComponents();
-        presenter.loadUserInfo();
+        checkAuthorization();
     }
 
     private void configureActionBar(){
         if (getSupportActionBar() != null){
             getSupportActionBar().setElevation(0);
+        }
+    }
+
+    private void checkAuthorization() {
+        if (prefsHelper.isAuthenticated()){
+            initComponents();
+            presenter.loadUserInfo();
+        } else {
+            Intent intent = new Intent(this, LoginTypeChooserActivity.class);
+            startActivityForResult(intent, LOGIN_CHOOSER_ACTIVITY);
         }
     }
 
@@ -64,7 +80,6 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
     }
 
     private void initPresenter() {
-        ((MyApp)getApplication()).getMyComponent().inject(this);
         presenter.bindView(this);
     }
 
@@ -117,6 +132,24 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == LOGIN_CHOOSER_ACTIVITY){
+            if (resultCode == RESULT_OK){
+                // todo okhttp need token
+                ((MyApp)getApplication()).recreateMyComponent();
+                presenter = null;
+                prefsHelper = null;
+                ((MyApp)getApplication()).getMyComponent().inject(this);
+                /////////////////////
+                initComponents();
+                presenter.loadUserInfo();
+            } else if (resultCode == RESULT_CANCELED){
+                finish();
+            }
         }
     }
 

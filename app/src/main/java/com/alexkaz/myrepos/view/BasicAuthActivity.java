@@ -53,8 +53,15 @@ public class BasicAuthActivity extends AppCompatActivity implements BasicAuthVie
     }
 
     @Override
+    public void onBackPressed() {
+        setResult(RESULT_CANCELED);
+        super.onBackPressed();
+    }
+
+    @Override
     public void authenticated() {
-        // todo start activity with user repos and info
+        setResult(RESULT_OK);
+        finish();
     }
 
     @Override

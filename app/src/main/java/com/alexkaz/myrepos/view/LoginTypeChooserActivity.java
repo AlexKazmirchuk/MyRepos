@@ -15,6 +15,8 @@ import javax.inject.Inject;
 
 public class LoginTypeChooserActivity extends AppCompatActivity implements Login0AuthView {
 
+    private static final int BASIC_AUTH_ACTIVITY = 200;
+
     @Inject
     Login0AuthPresenter presenter;
 
@@ -23,7 +25,6 @@ public class LoginTypeChooserActivity extends AppCompatActivity implements Login
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initPresenter();
-        handleIntent(getIntent());
     }
 
     private void initPresenter() {
@@ -45,13 +46,39 @@ public class LoginTypeChooserActivity extends AppCompatActivity implements Login
             startActivity(browserIntent);
         }
         if (view.getId() == R.id.BasicBtn){
-            startActivity(new Intent(this,BasicAuthActivity.class));
+            startActivityForResult(new Intent(this,BasicAuthActivity.class), BASIC_AUTH_ACTIVITY);
         }
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == BASIC_AUTH_ACTIVITY){
+            if (resultCode == RESULT_OK){
+                setResult(RESULT_OK);
+                finish();
+            } else if (resultCode == RESULT_CANCELED){
+                // todo
+            }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(RESULT_CANCELED);
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        handleIntent(intent);
+        Toast.makeText(this,"intent received", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
     public void authenticated() {
-        //todo go to UserReposActivity
+        setResult(RESULT_OK);
+        finish();
     }
 
     @Override

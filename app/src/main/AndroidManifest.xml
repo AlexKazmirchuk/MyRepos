@@ -13,19 +13,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.LoginTypeChooserActivity">
+        <activity android:name=".view.LoginTypeChooserActivity" android:launchMode="singleInstance">
             <intent-filter>
                 <data
                     android:host="login"
                     android:scheme="githubapp"/>
-                <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.UserReposActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.UserReposActivity" />
         <activity android:name=".view.SearchReposActivity" />
         <activity
             android:name=".view.BasicAuthActivity"
