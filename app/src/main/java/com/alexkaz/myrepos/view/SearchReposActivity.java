@@ -42,7 +42,14 @@ public class SearchReposActivity extends AppCompatActivity implements SearchRepo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_repos);
 
+        configureActionBar();
         initComponents();
+    }
+
+    private void configureActionBar(){
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setElevation(0);
+        }
     }
 
     private void initComponents(){
