@@ -1,8 +1,11 @@
 package com.alexkaz.myrepos.model.entities;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class RepoEntity {
+public class RepoEntity implements Parcelable {
 
     @SerializedName("id")
     private int id;
@@ -105,4 +108,46 @@ public class RepoEntity {
     public void setForksCount(int forksCount) {
         this.forksCount = forksCount;
     }
+
+    private RepoEntity(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        fullName = in.readString();
+        description = in.readString();
+        size = in.readInt();
+        stargazersCount = in.readInt();
+        watchersCount = in.readInt();
+        forksCount = in.readInt();
+        language = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(name);
+        dest.writeString(fullName);
+        dest.writeString(description);
+        dest.writeInt(size);
+        dest.writeInt(stargazersCount);
+        dest.writeInt(watchersCount);
+        dest.writeInt(forksCount);
+        dest.writeString(language);
+    }
+
+    public static final Parcelable.Creator<RepoEntity> CREATOR = new Parcelable.Creator<RepoEntity>() {
+        @Override
+        public RepoEntity createFromParcel(Parcel in) {
+            return new RepoEntity(in);
+        }
+
+        @Override
+        public RepoEntity[] newArray(int size) {
+            return new RepoEntity[size];
+        }
+    };
 }

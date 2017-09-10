@@ -1,7 +1,8 @@
 package com.alexkaz.myrepos.view;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.alexkaz.myrepos.presenter.SearchReposPresenter;
 import com.alexkaz.myrepos.ui.RepoRVAdapter;
 import com.paginate.Paginate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -108,6 +110,32 @@ public class SearchReposActivity extends AppCompatActivity implements SearchRepo
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList("list", (ArrayList<? extends Parcelable>) adapter.getItems());
+        outState.putBoolean("progressBar_showed", searchReposPB.isShown());
+        outState.putBoolean("loadingInProgress",loadingInProgress);
+        outState.putBoolean("hasLoadedAllItems",hasLoadedAllItems);
+        outState.putBoolean("searchBtnPressed",searchBtnPressed);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle state) {
+        super.onRestoreInstanceState(state);
+
+        adapter.add(state.getParcelableArrayList("list"));
+        adapter.notifyDataSetChanged();
+        loadingInProgress = state.getBoolean("loadingInProgress");
+        hasLoadedAllItems = state.getBoolean("hasLoadedAllItems");
+        searchBtnPressed = state.getBoolean("searchBtnPressed");
+        if (state.getBoolean("progressBar_showed", false)){
+            showLoading();
+        } else {
+            hideLoading();
+        }
+    }
+
+    @Override
     public String getQueryText() {
         return searchET.getText().toString();
     }
@@ -126,7 +154,7 @@ public class SearchReposActivity extends AppCompatActivity implements SearchRepo
     @Override
     public void clearUpList() {
         adapter.clear();
-        adapter.notifyDataSetChanged();
+        searchReposRV.setVisibility(View.INVISIBLE);
         hasLoadedAllItems = false;
     }
 

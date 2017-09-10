@@ -25,6 +25,10 @@ public class RepoRVAdapter extends RecyclerView.Adapter<RepoRVAdapter.UserRepoVH
         }
     }
 
+    public List<RepoEntity> getItems(){
+        return userRepos;
+    }
+
     public void clear(){
         userRepos.clear();
     }

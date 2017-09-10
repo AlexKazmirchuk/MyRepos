@@ -4,6 +4,8 @@ import com.alexkaz.myrepos.model.services.ConnInfoHelper;
 import com.alexkaz.myrepos.model.services.GithubService;
 import com.alexkaz.myrepos.view.SearchReposView;
 
+import io.reactivex.disposables.Disposable;
+
 public class SearchReposPresenterImpl implements SearchReposPresenter {
 
     private SearchReposView view;
@@ -14,6 +16,8 @@ public class SearchReposPresenterImpl implements SearchReposPresenter {
     private int page = 1;
     private int perPage = 8;
 
+    private Disposable disposable;
+
     public SearchReposPresenterImpl(GithubService githubService, ConnInfoHelper connInfoHelper) {
         this.githubService = githubService;
         this.helper = connInfoHelper;
@@ -22,8 +26,6 @@ public class SearchReposPresenterImpl implements SearchReposPresenter {
     @Override
     public void bindView(SearchReposView view) {
         this.view = view;
-        page = 1;
-        mQuery = "";
     }
 
     @Override
@@ -31,6 +33,11 @@ public class SearchReposPresenterImpl implements SearchReposPresenter {
         page = 1;
         view.clearUpList();
         mQuery = view.getQueryText();
+        if (disposable != null ){
+            if (!disposable.isDisposed()){
+                disposable.dispose();
+            }
+        }
         load();
     }
 
@@ -38,7 +45,7 @@ public class SearchReposPresenterImpl implements SearchReposPresenter {
     public void load() {
         if (helper.isOnline()){
             view.showLoading();
-            githubService.getReposByName(mQuery, page,perPage).subscribe(
+            disposable = githubService.getReposByName(mQuery, page,perPage).subscribe(
                     wrapper ->{
                         view.showRepos(wrapper.getItems());
                         page++;
