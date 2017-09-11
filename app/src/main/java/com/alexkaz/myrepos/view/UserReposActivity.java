@@ -2,6 +2,7 @@ package com.alexkaz.myrepos.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,10 +18,11 @@ import com.alexkaz.myrepos.model.entities.RepoEntity;
 import com.alexkaz.myrepos.model.entities.UserEntity;
 import com.alexkaz.myrepos.model.services.PrefsHelper;
 import com.alexkaz.myrepos.presenter.UserReposPresenter;
-import com.alexkaz.myrepos.ui.UserInfoView;
 import com.alexkaz.myrepos.ui.RepoRVAdapter;
+import com.alexkaz.myrepos.ui.UserInfoView;
 import com.paginate.Paginate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -51,7 +53,7 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
 
         ((MyApp)getApplication()).getMyComponent().inject(this);
         configureActionBar();
-        checkAuthorization();
+        checkAuthorization(savedInstanceState);
     }
 
     private void configureActionBar(){
@@ -60,10 +62,12 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
         }
     }
 
-    private void checkAuthorization() {
+    private void checkAuthorization(Bundle state) {
         if (prefsHelper.isAuthenticated()){
             initComponents();
-            presenter.loadUserInfo();
+            if (state == null){
+                presenter.loadUserInfo();
+            }
         } else {
             Intent intent = new Intent(this, LoginTypeChooserActivity.class);
             startActivityForResult(intent, LOGIN_CHOOSER_ACTIVITY);
@@ -139,17 +143,44 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == LOGIN_CHOOSER_ACTIVITY){
             if (resultCode == RESULT_OK){
-                // todo okhttp need token
                 ((MyApp)getApplication()).recreateMyComponent();
                 presenter = null;
                 prefsHelper = null;
                 ((MyApp)getApplication()).getMyComponent().inject(this);
-                /////////////////////
                 initComponents();
                 presenter.loadUserInfo();
             } else if (resultCode == RESULT_CANCELED){
                 finish();
             }
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("user_info", userInfoView.getValues());
+        outState.putParcelableArrayList("list", (ArrayList<? extends Parcelable>) adapter.getItems());
+        outState.putBoolean("loadingInProgress",loadingInProgress);
+        outState.putBoolean("hasLoadedAllItems",hasLoadedAllItems);
+        outState.putBoolean("progressBar_showed", progressBar.isShown());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle state) {
+        super.onRestoreInstanceState(state);
+        if (state.getParcelable("user_info") != null){
+            userInfoView.setValues(state.getParcelable("user_info"));
+            userInfoView.setVisibility(View.VISIBLE);
+        }
+
+        adapter.add(state.getParcelableArrayList("list"));
+        adapter.notifyDataSetChanged();
+        loadingInProgress = state.getBoolean("loadingInProgress");
+        hasLoadedAllItems = state.getBoolean("hasLoadedAllItems");
+        if (state.getBoolean("progressBar_showed", false)){
+            showLoading();
+        } else {
+            hideLoading();
         }
     }
 

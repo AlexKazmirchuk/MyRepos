@@ -20,6 +20,8 @@ public class UserInfoView extends LinearLayout {
     private TextView userFollowersCountTV;
     private TextView userReposCountTV;
 
+    private UserEntity user;
+
     public UserInfoView(Context context) {
         super(context);
         init(context);
@@ -43,6 +45,7 @@ public class UserInfoView extends LinearLayout {
     }
 
     public void setValues(UserEntity user){
+        this.user = user;
         Picasso.with(getContext()).load(user.getAvatarUrl()).transform(new CircleTransform()).into(userPhotoIV);
 
         if (user.getName() != null && !(user.getName().equals(""))){
@@ -50,6 +53,8 @@ public class UserInfoView extends LinearLayout {
         } else {
             userNameTV.setText(user.getLogin());
         }
+
+        userInfoItemDiv.removeAllViews();
 
         if (user.getBio() != null && !(user.getBio().equals(""))){
             userInfoItemDiv.addView(new UserInfoItemView(getContext(), UserInfoItemView.BIO, user.getBio()));
@@ -69,6 +74,10 @@ public class UserInfoView extends LinearLayout {
 
         userFollowersCountTV.setText(String.valueOf(user.getFollowers()));
         userReposCountTV.setText(String.valueOf(user.getPublicRepos()));
+    }
+
+    public UserEntity getValues(){
+        return user;
     }
 
     public void show(){

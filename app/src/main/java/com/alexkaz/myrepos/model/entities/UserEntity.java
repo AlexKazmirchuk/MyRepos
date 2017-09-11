@@ -1,8 +1,11 @@
 package com.alexkaz.myrepos.model.entities;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class UserEntity {
+public class UserEntity implements Parcelable {
 
     @SerializedName("login")
     private String login;
@@ -146,4 +149,54 @@ public class UserEntity {
     public void setCompany(String company) {
         this.company = company;
     }
+
+    private UserEntity(Parcel in) {
+        login = in.readString();
+        id = in.readInt();
+        avatarUrl = in.readString();
+        name = in.readString();
+        location = in.readString();
+        email = in.readString();
+        bio = in.readString();
+        blog = in.readString();
+        publicRepos = in.readInt();
+        publicGists = in.readInt();
+        followers = in.readInt();
+        following = in.readInt();
+        company = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(login);
+        dest.writeInt(id);
+        dest.writeString(avatarUrl);
+        dest.writeString(name);
+        dest.writeString(location);
+        dest.writeString(email);
+        dest.writeString(bio);
+        dest.writeString(blog);
+        dest.writeInt(publicRepos);
+        dest.writeInt(publicGists);
+        dest.writeInt(followers);
+        dest.writeInt(following);
+        dest.writeString(company);
+    }
+
+    public static final Parcelable.Creator<UserEntity> CREATOR = new Parcelable.Creator<UserEntity>() {
+        @Override
+        public UserEntity createFromParcel(Parcel in) {
+            return new UserEntity(in);
+        }
+
+        @Override
+        public UserEntity[] newArray(int size) {
+            return new UserEntity[size];
+        }
+    };
 }
