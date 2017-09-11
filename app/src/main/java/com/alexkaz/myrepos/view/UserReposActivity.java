@@ -64,7 +64,7 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
 
     private void checkAuthorization(Bundle state) {
         if (prefsHelper.isAuthenticated()){
-            initComponents();
+            initComponents(state);
             if (state == null){
                 presenter.loadUserInfo();
             }
@@ -74,24 +74,34 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
         }
     }
 
-    private void initComponents(){
+    private void initComponents(Bundle state){
         progressBar = findViewById(R.id.userReposPB);
         noConnView = findViewById(R.id.noConnLayout);
         userInfoView = findViewById(R.id.userInfoView);
-
-        initPresenter();
-        initRecyclerView();
-    }
-
-    private void initPresenter() {
-        presenter.bindView(this);
-    }
-
-    private void initRecyclerView() {
         repoListRV = findViewById(R.id.repoListRV);
-        adapter = new RepoRVAdapter();
+
+        presenter.bindView(this);
+
         repoListRV.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new RepoRVAdapter();
         repoListRV.setAdapter(adapter);
+
+        if (state != null){
+            if (state.getParcelable("user_info") != null){
+                userInfoView.setValues(state.getParcelable("user_info"));
+                userInfoView.setVisibility(View.VISIBLE);
+            }
+
+            adapter.add(state.getParcelableArrayList("list"));
+            adapter.notifyDataSetChanged();
+            loadingInProgress = state.getBoolean("loadingInProgress");
+            hasLoadedAllItems = state.getBoolean("hasLoadedAllItems");
+            if (state.getBoolean("progressBar_showed", false)){
+                showLoading();
+            } else {
+                hideLoading();
+            }
+        }
 
         Paginate.Callbacks callbacks = new Paginate.Callbacks() {
             @Override
@@ -147,7 +157,7 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
                 presenter = null;
                 prefsHelper = null;
                 ((MyApp)getApplication()).getMyComponent().inject(this);
-                initComponents();
+                initComponents(null);
                 presenter.loadUserInfo();
             } else if (resultCode == RESULT_CANCELED){
                 finish();
@@ -163,25 +173,6 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
         outState.putBoolean("loadingInProgress",loadingInProgress);
         outState.putBoolean("hasLoadedAllItems",hasLoadedAllItems);
         outState.putBoolean("progressBar_showed", progressBar.isShown());
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle state) {
-        super.onRestoreInstanceState(state);
-        if (state.getParcelable("user_info") != null){
-            userInfoView.setValues(state.getParcelable("user_info"));
-            userInfoView.setVisibility(View.VISIBLE);
-        }
-
-        adapter.add(state.getParcelableArrayList("list"));
-        adapter.notifyDataSetChanged();
-        loadingInProgress = state.getBoolean("loadingInProgress");
-        hasLoadedAllItems = state.getBoolean("hasLoadedAllItems");
-        if (state.getBoolean("progressBar_showed", false)){
-            showLoading();
-        } else {
-            hideLoading();
-        }
     }
 
     @Override
@@ -204,7 +195,6 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
     @Override
     public void clearUpList() {
         adapter.clear();
-        adapter.notifyDataSetChanged();
         hasLoadedAllItems = false;
     }
 

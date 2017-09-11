@@ -4,7 +4,7 @@ import com.alexkaz.myrepos.model.services.ConnInfoHelper;
 import com.alexkaz.myrepos.model.services.GithubService;
 import com.alexkaz.myrepos.view.UserReposView;
 
-import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 public class UserReposPresenterImpl implements UserReposPresenter {
 
@@ -18,7 +18,7 @@ public class UserReposPresenterImpl implements UserReposPresenter {
     private boolean userInfoLoaded;
     private boolean repoListLoaded;
 
-    private final CompositeDisposable disposables = new CompositeDisposable();
+    private Disposable disposable;
 
     public UserReposPresenterImpl(GithubService githubService, ConnInfoHelper connInfoHelper) {
         this.githubService = githubService;
@@ -32,19 +32,25 @@ public class UserReposPresenterImpl implements UserReposPresenter {
 
     @Override
     public void refresh() {
-        disposables.clear();
+        if (disposable != null ){
+            if (!disposable.isDisposed()){
+                disposable.dispose();
+            }
+        }
         if (!userInfoLoaded){
             loadUserInfo();
         }
         page = 1;
         view.clearUpList();
+        view.hideRepos();
+        loadNextPage();
     }
 
     @Override
     public void loadNextPage() {
         if (helper.isOnline()){
             view.showLoading();
-            disposables.add(githubService.getUserRepos(page, perPage).subscribe(repos -> {
+            disposable = githubService.getUserRepos(page, perPage).subscribe(repos -> {
                 repoListLoaded = true;
                 view.showRepos(repos);
                 page++;
@@ -56,7 +62,7 @@ public class UserReposPresenterImpl implements UserReposPresenter {
             }, throwable -> {
                 view.hideLoading();
                 view.showErrorMessage(throwable.getMessage());
-            }));
+            });
         } else {
             view.showErrorMessage("No internet connection!");
         }
@@ -66,7 +72,7 @@ public class UserReposPresenterImpl implements UserReposPresenter {
     public void loadUserInfo() {
         if (helper.isOnline()){
             view.showLoading();
-            disposables.add(githubService.getUser().subscribe(user -> {
+            githubService.getUser().subscribe(user -> {
                 view.showUserInfo(user);
                 userInfoLoaded = true;
                 if (repoListLoaded){
@@ -76,7 +82,7 @@ public class UserReposPresenterImpl implements UserReposPresenter {
             }, throwable -> {
                 view.hideLoading();
                 view.showErrorMessage(throwable.getMessage());
-            }));
+            });
         } else {
             view.showErrorMessage("No internet connection!");
         }
