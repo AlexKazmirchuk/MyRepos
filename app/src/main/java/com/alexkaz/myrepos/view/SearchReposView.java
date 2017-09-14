@@ -16,11 +16,7 @@ public interface SearchReposView {
 
     void showErrorMessage(String message);
 
-    void showNoConnectionMessage();
-
     void hideLoading();
-
-    void hideNoConnectionMessage();
 
     void hideRepos();
 

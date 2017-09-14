@@ -33,7 +33,6 @@ public class SearchReposActivity extends AppCompatActivity implements SearchRepo
     private RecyclerView searchReposRV;
     private RepoRVAdapter adapter;
     private ProgressBar searchReposPB;
-    private View noConnView;
 
     private boolean loadingInProgress = false;
     private boolean hasLoadedAllItems = false;
@@ -51,13 +50,13 @@ public class SearchReposActivity extends AppCompatActivity implements SearchRepo
     private void configureActionBar(){
         if (getSupportActionBar() != null){
             getSupportActionBar().setElevation(0);
+            getSupportActionBar().setTitle("Search");
         }
     }
 
     private void initComponents(){
         searchET = findViewById(R.id.searchET);
         searchReposPB = findViewById(R.id.searchReposPB);
-        noConnView = findViewById(R.id.noConnLayout);
 
         initPresenter();
         initRecyclerView();
@@ -169,18 +168,8 @@ public class SearchReposActivity extends AppCompatActivity implements SearchRepo
     }
 
     @Override
-    public void showNoConnectionMessage() {
-        noConnView.setVisibility(View.VISIBLE);
-    }
-
-    @Override
     public void hideLoading() {
         searchReposPB.setVisibility(View.INVISIBLE);
-    }
-
-    @Override
-    public void hideNoConnectionMessage() {
-        noConnView.setVisibility(View.INVISIBLE);
     }
 
     @Override

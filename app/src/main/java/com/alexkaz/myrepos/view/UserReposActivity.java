@@ -62,6 +62,7 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
     private void configureActionBar(){
         if (getSupportActionBar() != null){
             getSupportActionBar().setElevation(0);
+            getSupportActionBar().setTitle("My repositories");
         }
     }
 
