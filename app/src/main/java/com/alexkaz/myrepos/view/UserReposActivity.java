@@ -215,7 +215,7 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
     }
 
     @Override
-    public void showErrorMessage(String message) {
+    public void showWarningMessage(String message) {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
     }
 

@@ -163,7 +163,7 @@ public class SearchReposActivity extends AppCompatActivity implements SearchRepo
     }
 
     @Override
-    public void showErrorMessage(String message) {
+    public void showWarningMessage(String message) {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
     }
 

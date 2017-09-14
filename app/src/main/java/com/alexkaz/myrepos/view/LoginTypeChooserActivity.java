@@ -66,7 +66,7 @@ public class LoginTypeChooserActivity extends AppCompatActivity implements Login
                 setResult(RESULT_OK);
                 finish();
             } else if (resultCode == RESULT_CANCELED){
-                // todo
+                showWarningMessage("Canceled!");
             }
         }
     }
@@ -107,7 +107,7 @@ public class LoginTypeChooserActivity extends AppCompatActivity implements Login
     }
 
     @Override
-    public void showErrorMessage(String message) {
+    public void showWarningMessage(String message) {
         Toast.makeText(this,message,Toast.LENGTH_LONG).show();
     }
 

@@ -2,7 +2,6 @@ package com.alexkaz.myrepos.model.services;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.text.TextUtils;
 
 public class PrefsHelperImpl implements PrefsHelper {
 

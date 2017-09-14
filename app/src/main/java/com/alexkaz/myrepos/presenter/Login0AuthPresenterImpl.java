@@ -1,7 +1,5 @@
 package com.alexkaz.myrepos.presenter;
 
-import android.util.Log;
-
 import com.alexkaz.myrepos.model.api.Github0AuthApi;
 import com.alexkaz.myrepos.model.entities.TokenEntity;
 import com.alexkaz.myrepos.model.services.ConnInfoHelper;
@@ -45,20 +43,19 @@ public class Login0AuthPresenterImpl implements Login0AuthPresenter {
                         prefsHelper.saveToken("token " + token);
                         prefsHelper.setAuthenticated(true);
                         view.authenticated();
-                        Log.d("myTag", "token - " + token);
                     } else {
-                        view.showErrorMessage(response.message());
+                        view.showWarningMessage(response.message());
                     }
                 }
 
                 @Override
                 public void onFailure(Call<TokenEntity> call, Throwable t) {
                     view.hideLoading();
-                    view.showErrorMessage(t.getMessage());
+                    view.showWarningMessage(t.getMessage());
                 }
             });
         } else {
-            view.showErrorMessage("No internet connection!");
+            view.showWarningMessage("No internet connection!");
         }
     }
 }

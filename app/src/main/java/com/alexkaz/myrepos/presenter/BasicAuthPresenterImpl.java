@@ -6,8 +6,6 @@ import com.alexkaz.myrepos.model.services.ConnInfoHelper;
 import com.alexkaz.myrepos.model.services.PrefsHelper;
 import com.alexkaz.myrepos.view.BasicAuthView;
 
-import java.io.IOException;
-
 import okhttp3.Credentials;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,34 +43,34 @@ public class BasicAuthPresenterImpl implements BasicAuthPresenter {
                             prefsHelper.setAuthenticated(true);
                             view.authenticated();
                         } else {
-                            view.showBadCredentialsError("Failed to sign in! Try again.");
+                            view.showBadCredentialsWarning("Failed to sign in! Try again.");
                         }
                     }
 
                     @Override
                     public void onFailure(Call<UserEntity> call, Throwable t) {
                         view.hideLoading();
-                        view.showErrorMessage(t.getMessage());
+                        view.showWarningMessage(t.getMessage());
                     }
                 });
             } else {
-                view.showErrorMessage("No internet connection!");
+                view.showWarningMessage("No internet connection!");
             }
         }
     }
 
     private boolean validate(String userName, String password){
         if (userName.isEmpty() && password.isEmpty()){
-            view.showBadCredentialsError("Please enter the required fields!");
+            view.showBadCredentialsWarning("Please enter the required fields!");
             return false;
         }
 
         if (userName.isEmpty()){
-            view.showBadCredentialsError("Please enter username!");
+            view.showBadCredentialsWarning("Please enter username!");
             return false;
         }
         if (password.isEmpty()){
-            view.showBadCredentialsError("Please enter password!");
+            view.showBadCredentialsWarning("Please enter password!");
             return false;
         }
         return true;

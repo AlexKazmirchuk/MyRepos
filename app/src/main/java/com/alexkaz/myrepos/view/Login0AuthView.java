@@ -6,7 +6,7 @@ public interface Login0AuthView {
 
     void showLoading();
 
-    void showErrorMessage(String message);
+    void showWarningMessage(String message);
 
     void hideLoading();
 

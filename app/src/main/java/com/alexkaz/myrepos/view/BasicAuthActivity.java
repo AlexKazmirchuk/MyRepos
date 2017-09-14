@@ -84,8 +84,7 @@ public class BasicAuthActivity extends AppCompatActivity implements BasicAuthVie
     }
 
     @Override
-    public void showBadCredentialsError(String message) {
-        // TODO: create custom toast message
+    public void showBadCredentialsWarning(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
@@ -98,7 +97,7 @@ public class BasicAuthActivity extends AppCompatActivity implements BasicAuthVie
     }
 
     @Override
-    public void showErrorMessage(String message) {
+    public void showWarningMessage(String message) {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
     }
 

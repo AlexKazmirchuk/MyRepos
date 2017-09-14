@@ -14,7 +14,6 @@ public class SearchReposPresenterImpl implements SearchReposPresenter {
 
     private String mQuery = "";
     private int page = 1;
-    private int perPage = 8;
 
     private Disposable disposable;
 
@@ -45,21 +44,22 @@ public class SearchReposPresenterImpl implements SearchReposPresenter {
     public void load() {
         if (helper.isOnline()){
             view.showLoading();
-            disposable = githubService.getReposByName(mQuery, page,perPage).subscribe(
+            int perPage = 8;
+            disposable = githubService.getReposByName(mQuery, page, perPage).subscribe(
                     wrapper ->{
                         view.showRepos(wrapper.getItems());
                         page++;
                         view.hideLoading();
                         if (wrapper.getItems().size() == 0){
-                            view.showErrorMessage("We couldn’t find any repositories");
+                            view.showWarningMessage("We couldn’t find any repositories");
                         }
                     }
                     , throwable -> {
                         view.hideLoading();
-                        view.showErrorMessage(throwable.getMessage());
+                        view.showWarningMessage(throwable.getMessage());
                     });
         } else {
-            view.showErrorMessage("No internet connection!");
+            view.showWarningMessage("No internet connection!");
         }
     }
 

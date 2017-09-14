@@ -13,7 +13,6 @@ public class UserReposPresenterImpl implements UserReposPresenter {
     private ConnInfoHelper helper;
 
     private int page = 1;
-    private int perPage = 8;
 
     private boolean userInfoLoaded;
     private boolean repoListLoaded;
@@ -46,7 +45,7 @@ public class UserReposPresenterImpl implements UserReposPresenter {
             view.hideRepos();
             loadNextPage();
         } else {
-            view.showErrorMessage("No internet connection!");
+            view.showWarningMessage("No internet connection!");
         }
     }
 
@@ -55,6 +54,7 @@ public class UserReposPresenterImpl implements UserReposPresenter {
         if (helper.isOnline()){
             view.hideNoConnectionMessage();
             view.showLoading();
+            int perPage = 8;
             disposable = githubService.getUserRepos(page, perPage).subscribe(repos -> {
                 repoListLoaded = true;
                 view.showRepos(repos);
@@ -66,13 +66,13 @@ public class UserReposPresenterImpl implements UserReposPresenter {
                 }
             }, throwable -> {
                 view.hideLoading();
-                view.showErrorMessage(throwable.getMessage());
+                view.showWarningMessage(throwable.getMessage());
             });
         } else {
             if (!userInfoLoaded && !repoListLoaded){
                 view.showNoConnectionMessage();
             } else {
-                view.showErrorMessage("No internet connection!");
+                view.showWarningMessage("No internet connection!");
             }
         }
     }
@@ -91,13 +91,13 @@ public class UserReposPresenterImpl implements UserReposPresenter {
                 }
             }, throwable -> {
                 view.hideLoading();
-                view.showErrorMessage(throwable.getMessage());
+                view.showWarningMessage(throwable.getMessage());
             });
         } else {
             if (!userInfoLoaded && !repoListLoaded){
                 view.showNoConnectionMessage();
             } else {
-                view.showErrorMessage("No internet connection!");
+                view.showWarningMessage("No internet connection!");
             }
         }
     }

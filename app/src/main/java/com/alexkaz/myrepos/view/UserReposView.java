@@ -15,7 +15,7 @@ public interface UserReposView {
 
     void showLoading();
 
-    void showErrorMessage(String message);
+    void showWarningMessage(String message);
 
     void showNoConnectionMessage();
 
