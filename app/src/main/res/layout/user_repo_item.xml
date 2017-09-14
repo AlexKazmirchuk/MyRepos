@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -25,7 +25,6 @@
                 android:layout_height="70dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
-                android:text="JAVA"
                 android:textColor="#ffffff"
                 android:gravity="center"
                 android:background="@drawable/ic_lang_bg"
@@ -36,7 +35,6 @@
                 android:id="@+id/titleTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tetris"
                 android:textSize="22sp"
                 android:textColor="#ffffff"
                 android:layout_toEndOf="@id/langTV"
@@ -50,7 +48,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
-                android:text="This is an old simple logic game dfdf ddf dfdf dfdf fd fd f df d f  df  d f  df  df dfdfdf dfdfdf df df d"
                 android:layout_toEndOf="@id/langTV"
                 android:layout_below="@id/titleTV"
                 android:layout_marginStart="10dp"/>
@@ -68,13 +65,13 @@
                     android:layout_width="25dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_watchers"
-                    android:layout_marginEnd="7dp"/>
+                    android:layout_marginEnd="7dp"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/forksTV"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="34"
                     android:textSize="17sp"
                     android:textColor="#ffffff"
                     android:gravity="center_vertical"/>
@@ -85,13 +82,12 @@
                     android:src="@drawable/ic_stars"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="7dp"
-                    />
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/watchersTV"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="453"
                     android:textSize="17sp"
                     android:textColor="#ffffff"
                     android:gravity="center_vertical"/>
@@ -102,14 +98,12 @@
                     android:src="@drawable/ic_forks"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="7dp"
-
-                    />
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/starsTV"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="8"
                     android:textSize="17sp"
                     android:textColor="#ffffff"
                     android:gravity="center_vertical"/>

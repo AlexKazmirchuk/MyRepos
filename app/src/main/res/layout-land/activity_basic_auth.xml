@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,7 +16,7 @@
             android:id="@+id/loginAppTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="My repos viewer"
+            android:text="@string/basic_auth_login_title"
             android:textSize="30sp"
             android:textStyle="bold"
             android:textColor="#5C7B8B"
@@ -31,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:hint="Username"
+            android:hint="@string/username"
             android:background="@drawable/edittext_top_bg"
             android:padding="5dp"
             android:layout_marginBottom="1dp" />
@@ -42,7 +40,7 @@
             android:layout_gravity="center_horizontal"
             android:gravity="center"
             android:inputType="textPassword"
-            android:hint="Password"
+            android:hint="@string/password"
             android:background="@drawable/edittext_top_bg"
             android:padding="5dp"
             android:layout_marginBottom="3dp"/>
@@ -51,13 +49,11 @@
             android:layout_width="160dp"
             android:layout_height="32dp"
             android:layout_gravity="center_horizontal"
-            android:text="Sign In"
+            android:text="@string/sign_in"
             android:textColor="#ffffff"
             android:background="@drawable/login_button_bg"
             android:layout_marginStart="1dp"
             android:layout_marginEnd="1dp" />
-
-
 
     </LinearLayout>
 

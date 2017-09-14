@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -23,8 +24,9 @@
                 android:layout_height="100dp"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/circle"
-                android:padding="4dp" />
+                android:background="@drawable/rounded_bg"
+                android:padding="4dp"
+                tools:ignore="ContentDescription" />
         </FrameLayout>
 
         <TextView
@@ -36,7 +38,7 @@
             android:layout_toEndOf="@id/userImgDiv"
             android:layout_alignParentTop="true"
             android:textSize="20sp"
-            android:layout_marginRight="20dp"/>
+            android:layout_marginEnd="20dp"/>
 
         <LinearLayout
             android:id="@+id/userInfoItemDiv"
@@ -62,7 +64,8 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:src="@drawable/ic_followers"
-            android:layout_marginEnd="10dp" />
+            android:layout_marginEnd="10dp"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/userFollowersCountTV"
@@ -78,7 +81,8 @@
             android:layout_height="28dp"
             android:src="@drawable/ic_repo"
             android:padding="3dp"
-            android:layout_marginEnd="10dp"/>
+            android:layout_marginEnd="10dp"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/userReposCountTV"

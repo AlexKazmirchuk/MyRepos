@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">MyRepos</string>
+    <string name="basic_auth_login_title">Log in to Github</string>
+    <string name="sign_in">Sign In</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="basic_auth_login_logo">basic auth loginlogo</string>
+    <string name="enter_name">Enter repository name</string>
+    <string name="search">Search</string>
+    <string name="no_internet_connection">No internet connection!</string>
+    <string name="refresh">Refresh</string>
 </resources>

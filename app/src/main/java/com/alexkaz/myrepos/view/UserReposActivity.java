@@ -176,12 +176,14 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable("user_info", userInfoView.getValues());
-        outState.putParcelableArrayList("list", (ArrayList<? extends Parcelable>) adapter.getItems());
-        outState.putBoolean("loadingInProgress",loadingInProgress);
-        outState.putBoolean("hasLoadedAllItems",hasLoadedAllItems);
-        outState.putBoolean("progressBar_showed", progressBar.isShown());
-        outState.putBoolean("noConnView_showed", noConnView.isShown());
+        if (prefsHelper.isAuthenticated()){
+            outState.putParcelable("user_info", userInfoView.getValues());
+            outState.putParcelableArrayList("list", (ArrayList<? extends Parcelable>) adapter.getItems());
+            outState.putBoolean("loadingInProgress",loadingInProgress);
+            outState.putBoolean("hasLoadedAllItems",hasLoadedAllItems);
+            outState.putBoolean("progressBar_showed", progressBar.isShown());
+            outState.putBoolean("noConnView_showed", noConnView.isShown());
+        }
     }
 
     @Override
