@@ -27,6 +27,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
+
 public class UserReposActivity extends AppCompatActivity implements UserReposView {
 
     private static final int LOGIN_CHOOSER_ACTIVITY = 100;
@@ -84,7 +87,7 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
 
         repoListRV.setLayoutManager(new LinearLayoutManager(this));
         adapter = new RepoRVAdapter();
-        repoListRV.setAdapter(adapter);
+        repoListRV.setAdapter( new ScaleInAnimationAdapter( new AlphaInAnimationAdapter(adapter)));
 
         if (state != null){
             if (state.getParcelable("user_info") != null){
@@ -135,7 +138,6 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()){
             case R.id.action_search:
                 Intent intent = new Intent(this, SearchReposActivity.class);
