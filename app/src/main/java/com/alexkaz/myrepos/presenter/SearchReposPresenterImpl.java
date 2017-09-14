@@ -50,6 +50,9 @@ public class SearchReposPresenterImpl implements SearchReposPresenter {
                         view.showRepos(wrapper.getItems());
                         page++;
                         view.hideLoading();
+                        if (wrapper.getItems().size() == 0){
+                            view.showErrorMessage("We couldn’t find any repositories");
+                        }
                     }
                     , throwable -> {
                         view.hideLoading();
