@@ -32,23 +32,28 @@ public class UserReposPresenterImpl implements UserReposPresenter {
 
     @Override
     public void refresh() {
-        if (disposable != null ){
-            if (!disposable.isDisposed()){
-                disposable.dispose();
+        if (helper.isOnline()){
+            if (disposable != null ){
+                if (!disposable.isDisposed()){
+                    disposable.dispose();
+                }
             }
+            if (!userInfoLoaded){
+                loadUserInfo();
+            }
+            page = 1;
+            view.clearUpList();
+            view.hideRepos();
+            loadNextPage();
+        } else {
+            view.showErrorMessage("No internet connection!");
         }
-        if (!userInfoLoaded){
-            loadUserInfo();
-        }
-        page = 1;
-        view.clearUpList();
-        view.hideRepos();
-        loadNextPage();
     }
 
     @Override
     public void loadNextPage() {
         if (helper.isOnline()){
+            view.hideNoConnectionMessage();
             view.showLoading();
             disposable = githubService.getUserRepos(page, perPage).subscribe(repos -> {
                 repoListLoaded = true;
@@ -64,13 +69,18 @@ public class UserReposPresenterImpl implements UserReposPresenter {
                 view.showErrorMessage(throwable.getMessage());
             });
         } else {
-            view.showErrorMessage("No internet connection!");
+            if (!userInfoLoaded && !repoListLoaded){
+                view.showNoConnectionMessage();
+            } else {
+                view.showErrorMessage("No internet connection!");
+            }
         }
     }
 
     @Override
     public void loadUserInfo() {
         if (helper.isOnline()){
+            view.hideNoConnectionMessage();
             view.showLoading();
             githubService.getUser().subscribe(user -> {
                 view.showUserInfo(user);
@@ -84,7 +94,11 @@ public class UserReposPresenterImpl implements UserReposPresenter {
                 view.showErrorMessage(throwable.getMessage());
             });
         } else {
-            view.showErrorMessage("No internet connection!");
+            if (!userInfoLoaded && !repoListLoaded){
+                view.showNoConnectionMessage();
+            } else {
+                view.showErrorMessage("No internet connection!");
+            }
         }
     }
 }

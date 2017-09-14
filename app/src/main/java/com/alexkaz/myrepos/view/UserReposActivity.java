@@ -104,6 +104,11 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
             } else {
                 hideLoading();
             }
+            if (state.getBoolean("noConnView_showed", false)){
+                showNoConnectionMessage();
+            } else {
+                hideNoConnectionMessage();
+            }
         }
 
         Paginate.Callbacks callbacks = new Paginate.Callbacks() {
@@ -175,6 +180,7 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
         outState.putBoolean("loadingInProgress",loadingInProgress);
         outState.putBoolean("hasLoadedAllItems",hasLoadedAllItems);
         outState.putBoolean("progressBar_showed", progressBar.isShown());
+        outState.putBoolean("noConnView_showed", noConnView.isShown());
     }
 
     @Override
