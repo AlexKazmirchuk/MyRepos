@@ -2,11 +2,10 @@ package com.alexkaz.myrepos.presenter;
 
 import com.alexkaz.myrepos.view.SearchReposView;
 
-public interface SearchReposPresenter {
-
-    void bindView(SearchReposView view);
+public interface SearchReposPresenter extends BasePresenter <SearchReposView> {
 
     void load();
 
     void search();
+
 }

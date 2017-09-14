@@ -5,7 +5,7 @@ import com.alexkaz.myrepos.model.entities.UserEntity;
 
 import java.util.List;
 
-public interface UserReposView {
+public interface UserReposView extends BaseView {
 
     void showUserInfo(UserEntity user);
 
@@ -13,13 +13,7 @@ public interface UserReposView {
 
     void clearUpList();
 
-    void showLoading();
-
-    void showWarningMessage(String message);
-
     void showNoConnectionMessage();
-
-    void hideLoading();
 
     void hideNoConnectionMessage();
 

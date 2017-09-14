@@ -1,13 +1,7 @@
 package com.alexkaz.myrepos.view;
 
-public interface Login0AuthView {
+public interface Login0AuthView extends BaseView {
 
     void authenticated();
-
-    void showLoading();
-
-    void showWarningMessage(String message);
-
-    void hideLoading();
 
 }

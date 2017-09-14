@@ -4,19 +4,13 @@ import com.alexkaz.myrepos.model.entities.RepoEntity;
 
 import java.util.List;
 
-public interface SearchReposView {
+public interface SearchReposView extends BaseView {
 
     String getQueryText();
 
     void showRepos(List<RepoEntity> userRepos);
 
     void clearUpList();
-
-    void showLoading();
-
-    void showWarningMessage(String message);
-
-    void hideLoading();
 
     void hideRepos();
 
