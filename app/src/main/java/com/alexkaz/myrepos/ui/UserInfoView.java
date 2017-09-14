@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -82,6 +84,27 @@ public class UserInfoView extends LinearLayout {
 
     public void show(){
         this.setVisibility(VISIBLE);
+        startAnim();
     }
 
+    public void startAnim(){
+
+        Animation slideRightAnim = AnimationUtils.loadAnimation(getContext(), R.anim.slide_right_anim);
+        Animation slideLeftAnim = AnimationUtils.loadAnimation(getContext(), R.anim.slide_left_anim);
+
+        userPhotoIV.startAnimation(slideRightAnim);
+        userNameTV.startAnimation(slideLeftAnim);
+
+        for (int i = 0; i < userInfoItemDiv.getChildCount(); i++){
+            Animation userInfoItemAnim = AnimationUtils.loadAnimation(getContext(), R.anim.slide_left_anim);
+            userInfoItemAnim.setStartOffset(100*i + 100);
+            userInfoItemDiv.getChildAt(i).startAnimation(userInfoItemAnim);
+        }
+
+        findViewById(R.id.userFollowersCountIV).startAnimation(slideRightAnim);
+        findViewById(R.id.userReposCountIV).startAnimation(slideLeftAnim);
+
+        userFollowersCountTV.startAnimation(slideRightAnim);
+        userReposCountTV.startAnimation(slideLeftAnim);
+    }
 }

@@ -58,6 +58,7 @@
         android:layout_gravity="center">
 
         <ImageView
+            android:id="@+id/userFollowersCountIV"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:src="@drawable/ic_followers"
@@ -72,6 +73,7 @@
             android:gravity="center" />
 
         <ImageView
+            android:id="@+id/userReposCountIV"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:src="@drawable/ic_repo"
