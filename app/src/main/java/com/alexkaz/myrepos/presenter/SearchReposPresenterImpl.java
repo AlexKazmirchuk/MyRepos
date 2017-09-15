@@ -37,7 +37,12 @@ public class SearchReposPresenterImpl implements SearchReposPresenter {
                 disposable.dispose();
             }
         }
-        load();
+
+        if (!mQuery.isEmpty()){
+            load();
+        } else {
+            view.showWarningMessage("Please enter repository name!");
+        }
     }
 
     @Override
