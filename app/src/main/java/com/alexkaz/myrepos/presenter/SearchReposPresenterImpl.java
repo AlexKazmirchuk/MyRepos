@@ -29,16 +29,15 @@ public class SearchReposPresenterImpl implements SearchReposPresenter {
 
     @Override
     public void search() {
-        page = 1;
-        view.clearUpList();
-        mQuery = view.getQueryText();
-        if (disposable != null ){
-            if (!disposable.isDisposed()){
-                disposable.dispose();
+        if (!view.getQueryText().isEmpty()){
+            page = 1;
+            view.clearUpList();
+            mQuery = view.getQueryText();
+            if (disposable != null ){
+                if (!disposable.isDisposed()){
+                    disposable.dispose();
+                }
             }
-        }
-
-        if (!mQuery.isEmpty()){
             load();
         } else {
             view.showWarningMessage("Please enter repository name!");
