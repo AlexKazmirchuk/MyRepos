@@ -135,6 +135,12 @@ public class SearchReposActivity extends AppCompatActivity implements SearchRepo
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        presenter.reset();
+    }
+
+    @Override
     public String getQueryText() {
         return searchET.getText().toString();
     }

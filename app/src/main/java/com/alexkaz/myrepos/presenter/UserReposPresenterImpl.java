@@ -101,4 +101,16 @@ public class UserReposPresenterImpl implements UserReposPresenter {
             }
         }
     }
+
+    @Override
+    public void reset() {
+        page = 1;
+        userInfoLoaded = false;
+        repoListLoaded = false;
+        if (disposable != null ){
+            if (!disposable.isDisposed()){
+                disposable.dispose();
+            }
+        }
+    }
 }

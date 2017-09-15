@@ -8,4 +8,5 @@ public interface SearchReposPresenter extends BasePresenter <SearchReposView> {
 
     void search();
 
+    void reset();
 }

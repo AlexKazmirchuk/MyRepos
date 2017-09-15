@@ -10,4 +10,6 @@ public interface UserReposPresenter extends BasePresenter <UserReposView> {
 
     void loadUserInfo();
 
+    void reset();
+
 }

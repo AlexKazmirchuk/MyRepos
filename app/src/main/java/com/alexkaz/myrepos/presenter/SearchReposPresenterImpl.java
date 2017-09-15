@@ -41,6 +41,16 @@ public class SearchReposPresenterImpl implements SearchReposPresenter {
     }
 
     @Override
+    public void reset() {
+        page = 1;
+        if (disposable != null ){
+            if (!disposable.isDisposed()){
+                disposable.dispose();
+            }
+        }
+    }
+
+    @Override
     public void load() {
         if (helper.isOnline()){
             view.showLoading();

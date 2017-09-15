@@ -187,6 +187,12 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        presenter.reset();
+    }
+
+    @Override
     public void showUserInfo(UserEntity user) {
         userInfoView.setValues(user);
         userInfoView.show();
