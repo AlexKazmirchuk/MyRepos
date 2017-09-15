@@ -1,7 +1,7 @@
 package com.alexkaz.myrepos.presenter;
 
 import com.alexkaz.myrepos.model.services.ConnInfoHelper;
-import com.alexkaz.myrepos.model.services.GithubService;
+import com.alexkaz.myrepos.model.services.GitHubService;
 import com.alexkaz.myrepos.view.SearchReposView;
 
 import io.reactivex.disposables.Disposable;
@@ -9,7 +9,7 @@ import io.reactivex.disposables.Disposable;
 public class SearchReposPresenterImpl implements SearchReposPresenter {
 
     private SearchReposView view;
-    private GithubService githubService;
+    private GitHubService gitHubService;
     private ConnInfoHelper helper;
 
     private String mQuery = "";
@@ -17,8 +17,8 @@ public class SearchReposPresenterImpl implements SearchReposPresenter {
 
     private Disposable disposable;
 
-    public SearchReposPresenterImpl(GithubService githubService, ConnInfoHelper connInfoHelper) {
-        this.githubService = githubService;
+    public SearchReposPresenterImpl(GitHubService gitHubService, ConnInfoHelper connInfoHelper) {
+        this.gitHubService = gitHubService;
         this.helper = connInfoHelper;
     }
 
@@ -59,7 +59,7 @@ public class SearchReposPresenterImpl implements SearchReposPresenter {
         if (helper.isOnline()){
             view.showLoading();
             int perPage = 8;
-            disposable = githubService.getReposByName(mQuery, page, perPage).subscribe(
+            disposable = gitHubService.getReposByName(mQuery, page, perPage).subscribe(
                     wrapper ->{
                         view.showRepos(wrapper.getItems());
                         page++;

@@ -3,13 +3,12 @@ package com.alexkaz.myrepos.di.modules;
 import android.content.Context;
 
 import com.alexkaz.myrepos.model.api.BasicAuthApi;
-import com.alexkaz.myrepos.model.api.Github0AuthApi;
-import com.alexkaz.myrepos.model.api.GithubApi;
+import com.alexkaz.myrepos.model.api.GitHub0AuthApi;
+import com.alexkaz.myrepos.model.api.GitHubApi;
 import com.alexkaz.myrepos.model.services.ConnInfoHelper;
 import com.alexkaz.myrepos.model.services.ConnInfoHelperImpl;
 import com.alexkaz.myrepos.model.services.PrefsHelper;
 
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -25,13 +24,13 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    GithubApi provideGithubApi(OkHttpClient client){
+    GitHubApi provideGithubApi(OkHttpClient client){
         return new Retrofit.Builder()
-                .baseUrl(GithubApi.END_POINT)
+                .baseUrl(GitHubApi.END_POINT)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)
-                .build().create(GithubApi.class);
+                .build().create(GitHubApi.class);
     }
 
     @Provides
@@ -68,10 +67,10 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    Github0AuthApi provideGithub0AuthApi(){
+    GitHub0AuthApi provideGithub0AuthApi(){
         return new Retrofit.Builder()
-                .baseUrl(Github0AuthApi.END_POINT)
+                .baseUrl(GitHub0AuthApi.END_POINT)
                 .addConverterFactory(GsonConverterFactory.create())
-                .build().create(Github0AuthApi.class);
+                .build().create(GitHub0AuthApi.class);
     }
 }

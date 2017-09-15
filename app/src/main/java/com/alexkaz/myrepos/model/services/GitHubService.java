@@ -1,6 +1,6 @@
 package com.alexkaz.myrepos.model.services;
 
-import com.alexkaz.myrepos.model.api.GithubApi;
+import com.alexkaz.myrepos.model.api.GitHubApi;
 import com.alexkaz.myrepos.model.entities.RepoEntity;
 import com.alexkaz.myrepos.model.entities.SearchReposWrapper;
 import com.alexkaz.myrepos.model.entities.UserEntity;
@@ -13,35 +13,35 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class GithubService {
+public class GitHubService {
 
-    private GithubApi githubApi;
+    private GitHubApi gitHubApi;
 
     @Inject
-    public GithubService(GithubApi githubApi) {
-        this.githubApi = githubApi;
+    public GitHubService(GitHubApi gitHubApi) {
+        this.gitHubApi = gitHubApi;
     }
 
     public Observable<List<RepoEntity>> getUserRepos(int page, int perPage){
-        return githubApi.getUserRepos(page, perPage)
+        return gitHubApi.getUserRepos(page, perPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
     public Observable<SearchReposWrapper> getReposByName(String name){
-        return githubApi.getReposByName(name)
+        return gitHubApi.getReposByName(name)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
     public Observable<SearchReposWrapper> getReposByName(String name, int page, int perPage){
-        return githubApi.getReposByName(name, page, perPage)
+        return gitHubApi.getReposByName(name, page, perPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
     public Observable<UserEntity> getUser(){
-        return githubApi.getUser()
+        return gitHubApi.getUser()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

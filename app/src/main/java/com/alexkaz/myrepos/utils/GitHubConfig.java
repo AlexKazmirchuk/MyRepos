@@ -2,7 +2,7 @@ package com.alexkaz.myrepos.utils;
 
 import android.net.Uri;
 
-public class GithubConfig {
+public class GitHubConfig {
 
     public static final String CLIENT_ID = "06c4a6a738efcd9f2305";
 
@@ -15,7 +15,7 @@ public class GithubConfig {
     public static Uri getOauthUrl(){
         return Uri.parse(OAUTH_URL)
                 .buildUpon()
-                .appendQueryParameter("client_id",GithubConfig.CLIENT_ID)
+                .appendQueryParameter("client_id", GitHubConfig.CLIENT_ID)
                 .build();
     }
 

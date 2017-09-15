@@ -10,7 +10,7 @@ import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-public interface GithubApi {
+public interface GitHubApi {
 
     String END_POINT = "https://api.github.com/";
 

@@ -1,9 +1,9 @@
 package com.alexkaz.myrepos.di.modules;
 
 import com.alexkaz.myrepos.model.api.BasicAuthApi;
-import com.alexkaz.myrepos.model.api.Github0AuthApi;
+import com.alexkaz.myrepos.model.api.GitHub0AuthApi;
 import com.alexkaz.myrepos.model.services.ConnInfoHelper;
-import com.alexkaz.myrepos.model.services.GithubService;
+import com.alexkaz.myrepos.model.services.GitHubService;
 import com.alexkaz.myrepos.model.services.PrefsHelper;
 import com.alexkaz.myrepos.presenter.BasicAuthPresenter;
 import com.alexkaz.myrepos.presenter.BasicAuthPresenterImpl;
@@ -24,14 +24,14 @@ public class PresenterModule {
 
     @Singleton
     @Provides
-    UserReposPresenter provideUserReposPresenter(GithubService githubService, ConnInfoHelper connInfoHelper){
-        return new UserReposPresenterImpl(githubService, connInfoHelper);
+    UserReposPresenter provideUserReposPresenter(GitHubService gitHubService, ConnInfoHelper connInfoHelper){
+        return new UserReposPresenterImpl(gitHubService, connInfoHelper);
     }
 
     @Singleton
     @Provides
-    SearchReposPresenter provideSearchReposPresenter(GithubService githubService, ConnInfoHelper connInfoHelper){
-        return new SearchReposPresenterImpl(githubService, connInfoHelper);
+    SearchReposPresenter provideSearchReposPresenter(GitHubService gitHubService, ConnInfoHelper connInfoHelper){
+        return new SearchReposPresenterImpl(gitHubService, connInfoHelper);
     }
 
     @Singleton
@@ -42,7 +42,7 @@ public class PresenterModule {
 
     @Singleton
     @Provides
-    Login0AuthPresenter provideLogin0AuthPresenterImpl(Github0AuthApi authApi, ConnInfoHelper connInfoHelper, PrefsHelper prefsHelper){
+    Login0AuthPresenter provideLogin0AuthPresenterImpl(GitHub0AuthApi authApi, ConnInfoHelper connInfoHelper, PrefsHelper prefsHelper){
         return new Login0AuthPresenterImpl(authApi, connInfoHelper, prefsHelper);
     }
 

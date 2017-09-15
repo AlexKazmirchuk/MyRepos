@@ -1,7 +1,7 @@
 package com.alexkaz.myrepos.presenter;
 
 import com.alexkaz.myrepos.model.services.ConnInfoHelper;
-import com.alexkaz.myrepos.model.services.GithubService;
+import com.alexkaz.myrepos.model.services.GitHubService;
 import com.alexkaz.myrepos.view.UserReposView;
 
 import io.reactivex.disposables.Disposable;
@@ -9,7 +9,7 @@ import io.reactivex.disposables.Disposable;
 public class UserReposPresenterImpl implements UserReposPresenter {
 
     private UserReposView view;
-    private GithubService githubService;
+    private GitHubService gitHubService;
     private ConnInfoHelper helper;
 
     private int page = 1;
@@ -19,8 +19,8 @@ public class UserReposPresenterImpl implements UserReposPresenter {
 
     private Disposable disposable;
 
-    public UserReposPresenterImpl(GithubService githubService, ConnInfoHelper connInfoHelper) {
-        this.githubService = githubService;
+    public UserReposPresenterImpl(GitHubService gitHubService, ConnInfoHelper connInfoHelper) {
+        this.gitHubService = gitHubService;
         this.helper = connInfoHelper;
     }
 
@@ -55,7 +55,7 @@ public class UserReposPresenterImpl implements UserReposPresenter {
             view.hideNoConnectionMessage();
             view.showLoading();
             int perPage = 8;
-            disposable = githubService.getUserRepos(page, perPage).subscribe(repos -> {
+            disposable = gitHubService.getUserRepos(page, perPage).subscribe(repos -> {
                 repoListLoaded = true;
                 view.showRepos(repos);
                 page++;
@@ -82,7 +82,7 @@ public class UserReposPresenterImpl implements UserReposPresenter {
         if (helper.isOnline()){
             view.hideNoConnectionMessage();
             view.showLoading();
-            githubService.getUser().subscribe(user -> {
+            gitHubService.getUser().subscribe(user -> {
                 view.showUserInfo(user);
                 userInfoLoaded = true;
                 if (repoListLoaded){

@@ -1,6 +1,6 @@
 package com.alexkaz.myrepos.presenter;
 
-import com.alexkaz.myrepos.model.api.Github0AuthApi;
+import com.alexkaz.myrepos.model.api.GitHub0AuthApi;
 import com.alexkaz.myrepos.model.entities.TokenEntity;
 import com.alexkaz.myrepos.model.services.ConnInfoHelper;
 import com.alexkaz.myrepos.model.services.PrefsHelper;
@@ -14,11 +14,11 @@ public class Login0AuthPresenterImpl implements Login0AuthPresenter {
 
     private Login0AuthView view;
 
-    private Github0AuthApi authApi;
+    private GitHub0AuthApi authApi;
     private ConnInfoHelper connHelper;
     private PrefsHelper prefsHelper;
 
-    public Login0AuthPresenterImpl(Github0AuthApi authApi, ConnInfoHelper connHelper, PrefsHelper prefsHelper) {
+    public Login0AuthPresenterImpl(GitHub0AuthApi authApi, ConnInfoHelper connHelper, PrefsHelper prefsHelper) {
         this.authApi = authApi;
         this.connHelper = connHelper;
         this.prefsHelper = prefsHelper;

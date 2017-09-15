@@ -9,7 +9,7 @@ import com.alexkaz.myrepos.MyApp;
 import com.alexkaz.myrepos.R;
 import com.alexkaz.myrepos.presenter.Login0AuthPresenter;
 import com.alexkaz.myrepos.ui.CustomToast;
-import com.alexkaz.myrepos.utils.GithubConfig;
+import com.alexkaz.myrepos.utils.GitHubConfig;
 
 import javax.inject.Inject;
 
@@ -37,7 +37,7 @@ public class LoginTypeChooserActivity extends AppCompatActivity implements Login
 
     public void click(View view){
         if (view.getId() == R.id.oauthBtn){
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, GithubConfig.getOauthUrl());
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, GitHubConfig.getOauthUrl());
             startActivity(browserIntent);
         }
         if (view.getId() == R.id.BasicBtn){
