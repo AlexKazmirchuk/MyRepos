@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1A303D"
+    tools:context="com.alexkaz.myrepos.view.BasicAuthActivity">
+
+    <LinearLayout
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/loginAppTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/basic_auth_login_title"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="#5C7B8B"
+            android:layout_marginBottom="40dp"
+            android:gravity="center_horizontal" />
+
+        <EditText
+            android:id="@+id/userNameET"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:hint="@string/username"
+            android:background="@drawable/edittext_top_bg"
+            android:padding="5dp"
+            android:layout_marginBottom="1dp" />
+        <EditText
+            android:id="@+id/passwordET"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:inputType="textPassword"
+            android:hint="@string/password"
+            android:background="@drawable/edittext_top_bg"
+            android:padding="5dp"
+            android:layout_marginBottom="3dp"/>
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_width="160dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/sign_in"
+            android:textColor="#ffffff"
+            android:background="@drawable/login_button_bg"
+            android:layout_marginStart="1dp"
+            android:layout_marginEnd="1dp" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/loginPBDiv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#76121212"
+        android:visibility="invisible">
+
+        <ProgressBar
+            android:id="@+id/loginPB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+
+    </FrameLayout>
+
+</FrameLayout>

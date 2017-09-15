@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1A303D"
+    tools:context="com.alexkaz.myrepos.view.LoginTypeChooserActivity">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_type"
+            android:textColor="#345565"
+            android:textSize="30sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="30dp"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/oauthLogoIV"
+                android:layout_width="150dp"
+                android:layout_height="135dp"
+                android:background="@drawable/oauth_logo"
+                android:layout_marginBottom="3dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                tools:ignore="ContentDescription" />
+
+            <Button
+                android:id="@+id/oauthBtn"
+                android:layout_width="150dp"
+                android:layout_height="35dp"
+                android:text="@string/login_using_browser"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:onClick="click"
+                android:layout_below="@id/oauthLogoIV"
+                android:background="@drawable/login_button_bg" />
+
+            <ImageView
+                android:id="@+id/basicAuthLogoIV"
+                android:layout_width="150dp"
+                android:layout_height="135dp"
+                android:background="@drawable/basic_auth_logo"
+                android:layout_marginBottom="3dp"
+                android:layout_toEndOf="@id/oauthLogoIV"
+                android:layout_marginStart="70dp"
+                tools:ignore="ContentDescription" />
+
+            <Button
+                android:id="@+id/BasicBtn"
+                android:layout_width="150dp"
+                android:layout_height="35dp"
+                android:text="@string/basic_authentication"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:background="@drawable/login_button_bg"
+                android:layout_below="@id/basicAuthLogoIV"
+                android:layout_alignStart="@id/basicAuthLogoIV"
+                android:onClick="click"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/progressBarDiv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#54121212"
+        android:visibility="invisible">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+    </FrameLayout>
+
+</FrameLayout>
