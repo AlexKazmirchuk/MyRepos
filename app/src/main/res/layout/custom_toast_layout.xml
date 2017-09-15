@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/custom_toast_bg">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_alert"
+        android:layout_margin="5dp"/>
+
+    <TextView
+        android:id="@+id/customToastTV"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        tools:text="No internet connection!"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"
+        android:textColor="#ffffff" />
+
+
+</LinearLayout>

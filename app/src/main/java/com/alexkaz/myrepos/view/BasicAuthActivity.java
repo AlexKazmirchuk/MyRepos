@@ -5,11 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.alexkaz.myrepos.MyApp;
 import com.alexkaz.myrepos.R;
 import com.alexkaz.myrepos.presenter.BasicAuthPresenter;
+import com.alexkaz.myrepos.ui.CustomToast;
 
 import javax.inject.Inject;
 
@@ -85,7 +85,7 @@ public class BasicAuthActivity extends AppCompatActivity implements BasicAuthVie
 
     @Override
     public void showBadCredentialsWarning(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        new CustomToast(this).showMessage(message);
     }
 
     @Override
@@ -98,7 +98,7 @@ public class BasicAuthActivity extends AppCompatActivity implements BasicAuthVie
 
     @Override
     public void showWarningMessage(String message) {
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+        new CustomToast(this).showMessage(message);
     }
 
     @Override

@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_type"
-            android:textColor="#345565"
+            android:textColor="#76a0b4"
             android:textSize="30sp"
             android:layout_marginBottom="40dp"/>
 

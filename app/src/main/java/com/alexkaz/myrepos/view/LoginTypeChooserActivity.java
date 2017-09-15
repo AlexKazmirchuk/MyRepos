@@ -4,11 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.alexkaz.myrepos.MyApp;
 import com.alexkaz.myrepos.R;
 import com.alexkaz.myrepos.presenter.Login0AuthPresenter;
+import com.alexkaz.myrepos.ui.CustomToast;
 import com.alexkaz.myrepos.utils.GithubConfig;
 
 import javax.inject.Inject;
@@ -108,7 +108,7 @@ public class LoginTypeChooserActivity extends AppCompatActivity implements Login
 
     @Override
     public void showWarningMessage(String message) {
-        Toast.makeText(this,message,Toast.LENGTH_LONG).show();
+        new CustomToast(this).showMessage(message);
     }
 
     @Override

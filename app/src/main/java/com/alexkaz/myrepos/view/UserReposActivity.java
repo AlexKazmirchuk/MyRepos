@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.alexkaz.myrepos.MyApp;
 import com.alexkaz.myrepos.R;
@@ -18,6 +17,7 @@ import com.alexkaz.myrepos.model.entities.RepoEntity;
 import com.alexkaz.myrepos.model.entities.UserEntity;
 import com.alexkaz.myrepos.model.services.PrefsHelper;
 import com.alexkaz.myrepos.presenter.UserReposPresenter;
+import com.alexkaz.myrepos.ui.CustomToast;
 import com.alexkaz.myrepos.ui.RepoRVAdapter;
 import com.alexkaz.myrepos.ui.UserInfoView;
 import com.paginate.Paginate;
@@ -222,7 +222,7 @@ public class UserReposActivity extends AppCompatActivity implements UserReposVie
 
     @Override
     public void showWarningMessage(String message) {
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+        new CustomToast(this).showMessage(message);
     }
 
     @Override

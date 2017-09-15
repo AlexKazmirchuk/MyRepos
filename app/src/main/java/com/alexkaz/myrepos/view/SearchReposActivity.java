@@ -9,12 +9,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.alexkaz.myrepos.MyApp;
 import com.alexkaz.myrepos.R;
 import com.alexkaz.myrepos.model.entities.RepoEntity;
 import com.alexkaz.myrepos.presenter.SearchReposPresenter;
+import com.alexkaz.myrepos.ui.CustomToast;
 import com.alexkaz.myrepos.ui.RepoRVAdapter;
 import com.paginate.Paginate;
 
@@ -170,7 +170,7 @@ public class SearchReposActivity extends AppCompatActivity implements SearchRepo
 
     @Override
     public void showWarningMessage(String message) {
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+        new CustomToast(this).showMessage(message);
     }
 
     @Override
