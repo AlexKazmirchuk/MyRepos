@@ -41,6 +41,6 @@ the faster you’ll be able to receive our feedback.
 
 ## Screenshots
 
-![login type chooser screen](/art/1.png)![basic auth screen](/art/2.png)![user repos screen](/art/3.png) ![search screen](/art/4.png)
+![login type chooser screen](/art/1.png) ![basic auth screen](/art/2.png) ![user repos screen](/art/3.png) ![search screen](/art/4.png)
 
 
