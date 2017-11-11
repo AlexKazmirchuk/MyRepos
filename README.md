@@ -1,5 +1,5 @@
 
-# Completed test asignment
+# Completed Assessment Test for SteelKiwi Inc.
 
 ## Out test assignment includes:
 
@@ -38,3 +38,9 @@ close attention to its clarity and accuracy.
 If you have any questions about this task, please feel free to contact us.
 We do not set deadlines for test assignments, but the faster you’re done,
 the faster you’ll be able to receive our feedback. 
+
+## Screenshots
+
+![login type chooser screen](/art/1.png)![basic auth screen](/art/2.png)![user repos screen](/art/3.png) ![search screen](/art/4.png)
+
+
